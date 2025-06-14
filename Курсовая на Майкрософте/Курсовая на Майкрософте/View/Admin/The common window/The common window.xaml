@@ -1,0 +1,29 @@
+﻿<Window x:Class="Курсовая_на_Майкрософте.Forms.Admin.The_common_window.The_common_window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Курсовая_на_Майкрософте.Forms.Admin.The_common_window"
+        xmlns:admin="clr-namespace:Курсовая_на_Майкрософте.ViewModels.Admin"
+        mc:Ignorable="d"
+        Title="The_common_window" Height="450" Width="800"
+        Icon="/View/vecteezy_car-services-automotive-logo-design-template_12188355.jpg">
+
+    <Grid Style="{DynamicResource GridBackgroundStyle}">
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Orientation="Vertical" Style="{DynamicResource StackPanelStyle}" Margin="10">
+            <Button Command="{Binding GoToHomeCommand}" Content="Главная" Style="{StaticResource ButtonStyle}"/>
+            <Button Command="{Binding GoToUsersCommand}" Content="Пользователи" Style="{StaticResource ButtonStyle}" />
+            <Button Command="{Binding GoToSrviseCommand}" Content="Заказы" Style="{StaticResource ButtonStyle}"/>
+            <Button Command="{Binding GoToSettingsCommand}" Content="Настройки" Style="{StaticResource ButtonStyle}" />
+            <Button Command="{Binding ExitApplicationCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Content="Выход" Style="{StaticResource ButtonStyle}"/>
+        </StackPanel>
+
+        <Frame Grid.Column="1" Name="MainFrame" Margin="10" Style="{DynamicResource FrameStyle}" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>

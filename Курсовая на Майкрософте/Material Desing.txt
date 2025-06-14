@@ -1,0 +1,6 @@
+
+ уча разных возможностей по функционалу и визуальной части
+https://github.com/material-components/material-components-android/blob/master/docs/getting-started.md?ysclid=mbtttoizm3902222537
+
+»кноки
+https://pictogrammers.com/library/mdi/

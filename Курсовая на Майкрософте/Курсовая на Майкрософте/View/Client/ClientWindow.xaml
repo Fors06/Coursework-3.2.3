@@ -1,0 +1,102 @@
+﻿<Window x:Class="Курсовая_на_Майкрософте.View.Client.ClientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Курсовая_на_Майкрософте.View.Client"
+        xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:extToolkit1="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Услуги автосервиса" Height="600" Width="800" 
+        Icon="/View/vecteezy_car-services-automotive-logo-design-template_12188355.jpg">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <!--Основной элемент, в котором будет все содержимое окна-->
+        <extToolkit1:DrawerHost
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                BorderThickness="0"
+                BorderBrush="{DynamicResource MaterialDesignDivider}" Margin="0">
+            <!--Собственно, сама выдвижная панель-->
+            <extToolkit1:DrawerHost.LeftDrawerContent>
+                <StackPanel Margin="0,5,0,5" Width="212">
+                    <Button Content="Главная" Height="30"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Command="{Binding GoToHomeCommand}"/>
+                    <Button Content="Услуги" Height="30"
+                            Command="{Binding GoToServicesCommand}"
+                            Style="{StaticResource MaterialDesignFlatButton}"/>
+                    <Button Content="Услуги" Height="30"
+                            Command="{Binding GoToEntranceCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                            Style="{StaticResource MaterialDesignFlatButton}"/>
+
+                    <Separator Style="{StaticResource MaterialDesignSeparator}" 
+                               Margin="10"/>
+
+                    <Button
+                            Command="{x:Static extToolkit1:DrawerHost.CloseDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Left}"
+                            Margin="4"
+                            HorizontalAlignment="Center"
+                            Style="{DynamicResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <extToolkit1:PackIcon Kind="CloseBoxOutline" Foreground="{StaticResource MaterialDesign.Brush.Primary.Dark}"
+                                                 Height="25" Width="25"/>
+                            <TextBlock Text="Закрыть" Foreground="{StaticResource MaterialDesign.Brush.Primary.Dark}" Margin="3"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <!--Тут контент самого окна-->
+            </extToolkit1:DrawerHost.LeftDrawerContent>
+            <Grid>
+                <Grid VerticalAlignment="top" HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="{Binding ActHeight}" />
+                    </Grid.RowDefinitions>
+
+                    <!--Верхняя панель-->
+                    <extToolkit1:ColorZone
+                                Mode="Standard"
+                                Padding="0">
+
+                        <DockPanel Grid.Row="1" VerticalAlignment="Center" Margin="5,2,2,2" Height="40">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <!--MenuButton-->
+                                <Button x:Name="ButtonOpen" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                                        Background="{x:Null}" BorderBrush="{x:Null}" Width="40" Height="40" Padding="0"
+                                        Command="{x:Static extToolkit1:DrawerHost.OpenDrawerCommand}"
+                                        CommandParameter="{x:Static Dock.Left}">
+                                    <extToolkit1:PackIcon Kind="Menu" Foreground="{StaticResource MaterialDesign.Brush.Primary.Dark}" Width="30" Height="30"/>
+                                </Button>
+
+                            </StackPanel>
+
+                        </DockPanel>
+
+                    </extToolkit1:ColorZone>
+
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <ContentControl x:Name="ContentField" Content="{Binding CurrentControl}" Opacity="{Binding FrameOpacity}" MaxHeight="{Binding ActHeight}"/>
+                        </ScrollViewer>
+
+                    </StackPanel>
+
+                </Grid>
+                <Frame Name="MainFrame" Margin="0,40,0,0" NavigationUIVisibility="Hidden"/>
+            </Grid>
+        </extToolkit1:DrawerHost>
+    </Grid>
+</Window>

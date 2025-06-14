@@ -1,0 +1,41 @@
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="10">
+                
+                <!-- Замена масла -->
+                <Border Margin="10" Padding="10" Background="#EFEFEF" CornerRadius="5">
+                    <StackPanel>
+                        <Image Source="/Images/oil_change.jpg" Stretch="UniformToFill" Height="150" Margin="0,0,0,10"/>
+                        <TextBlock Text="Замена масла" FontSize="18" FontWeight="Medium" Margin="0,0,0,5"/>
+                        <TextBlock Text="Комплекс работ по замене моторного масла" FontSize="14" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                        <TextBlock Text="Стоимость: 1500 руб." FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                        <Button Content="Заполнить анкету" Style="{StaticResource ButtonStyle}" Command="{Binding RequestOilChangeCommand}" Margin="0,10,0,0"/>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Ремонт двигателя -->
+                <Border Margin="10" Padding="10" Background="#EFEFEF" CornerRadius="5">
+                    <StackPanel>
+                        <Image Source="/Images/engine_repair.jpg" Stretch="UniformToFill" Height="150" Margin="0,0,0,10"/>
+                        <TextBlock Text="Ремонт двигателя" FontSize="18" FontWeight="Medium" Margin="0,0,0,5"/>
+                        <TextBlock Text="Диагностика и ремонт двигателя автомобиля" FontSize="14" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                        <TextBlock Text="Стоимость: 10000 руб." FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                        <Button Content="Заполнить анкету" Style="{StaticResource ButtonStyle}" Command="{Binding RequestEngineRepairCommand}" Margin="0,10,0,0"/>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Шиномонтаж -->
+                <Border Margin="10" Padding="10" Background="#EFEFEF" CornerRadius="5">
+                    <StackPanel>
+                        <Image Source="/Images/tire_service.jpg" Stretch="UniformToFill" Height="150" Margin="0,0,0,10"/>
+                        <TextBlock Text="Шиномонтаж" FontSize="18" FontWeight="Medium" Margin="0,0,0,5"/>
+                        <TextBlock Text="Установка новых шин на автомобиль" FontSize="14" TextWrapping="Wrap" Margin="0,0,0,10"/>
+                        <TextBlock Text="Стоимость: 800 руб." FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                        <Button Content="Заполнить анкету" Style="{StaticResource ButtonStyle}" Command="{Binding RequestTireServiceCommand}" Margin="0,10,0,0"/>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Остальные услуги аналогично -->
+                
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
