@@ -35,7 +35,7 @@
                     <Button Content="Услуги" Height="30"
                             Command="{Binding GoToServicesCommand}"
                             Style="{StaticResource MaterialDesignFlatButton}"/>
-                    <Button Content="Услуги" Height="30"
+                    <Button Content="Вход" Height="30"
                             Command="{Binding GoToEntranceCommand}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                             Style="{StaticResource MaterialDesignFlatButton}"/>
