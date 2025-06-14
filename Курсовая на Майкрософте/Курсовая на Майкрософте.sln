@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Курсовая на Ма�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestDataAccess", "..\RequestDataAccess\RequestDataAccess\RequestDataAccess.csproj", "{031ABBF9-2E16-65E8-AE9F-802870E81650}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connection.Test", "Connection.Test\Connection.Test.csproj", "{7CCEB820-AAF0-41F6-9706-1A3D70690E37}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "View", "View", "{1B13A3B2-BEB6-4F19-A5E8-6ACB146E5A13}"
@@ -32,10 +30,6 @@ Global
 		{031ABBF9-2E16-65E8-AE9F-802870E81650}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{031ABBF9-2E16-65E8-AE9F-802870E81650}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{031ABBF9-2E16-65E8-AE9F-802870E81650}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7CCEB820-AAF0-41F6-9706-1A3D70690E37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7CCEB820-AAF0-41F6-9706-1A3D70690E37}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7CCEB820-AAF0-41F6-9706-1A3D70690E37}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7CCEB820-AAF0-41F6-9706-1A3D70690E37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,7 +37,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B139B5A3-FBE5-45F0-8034-81EB4D6B44C5} = {1B13A3B2-BEB6-4F19-A5E8-6ACB146E5A13}
 		{031ABBF9-2E16-65E8-AE9F-802870E81650} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
-		{7CCEB820-AAF0-41F6-9706-1A3D70690E37} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B6444F0A-019C-4F5E-94D7-541C1E498BE9}
