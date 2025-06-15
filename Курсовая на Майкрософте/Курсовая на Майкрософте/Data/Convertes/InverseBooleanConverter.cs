@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
 
-namespace Курсовая_на_Майкрософте.Data
+namespace Курсовая_на_Майкрософте.Data.Convertes
 {
     [ValueConversion(typeof(bool), typeof(bool))]
     public sealed class InverseBooleanConverter : IValueConverter

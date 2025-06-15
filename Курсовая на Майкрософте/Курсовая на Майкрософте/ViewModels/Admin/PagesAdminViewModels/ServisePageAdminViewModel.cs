@@ -1,19 +1,21 @@
-﻿using RequestDataAccess.Entity;
-using RequestDataAccess.Repository;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32;
 using RequestDataAccess;
+using RequestDataAccess.Entity;
+using RequestDataAccess.Repository;
+using RequestDataAccess.Repository.Abstraction;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using RequestDataAccess.Repository.Abstraction;
-using Microsoft.EntityFrameworkCore;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows;
 
 namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdminViewModels
 {
@@ -29,6 +31,8 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
         public ICommand ClearFieldsCommand => new RelayCommand(ClearFields);
         public ICommand AddCommand => new RelayCommand(Create);
         public ICommand DeleteServiceCommand => new RelayCommand(DeleteService);
+
+        public ICommand BrowsePhotoCommand => new RelayCommand(BrowsePhoto);
 
         public ObservableCollection<Services> Servises { get; set; } = new ObservableCollection<Services>();
 
@@ -99,6 +103,17 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
             {
                 showSuggestions = value;
                 OnPropertyChanged(nameof(ShowSuggestions));
+            }
+        }
+
+        private string _photoPath;
+        public string PhotoPath
+        {
+            get => _photoPath;
+            set
+            {
+                _photoPath = value;
+                OnPropertyChanged(nameof(PhotoPath));
             }
         }
 
@@ -279,6 +294,7 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
             Описание = "";
             Стоимость = null;
             Adress = "";
+            PhotoPath = "";
         }
 
         #endregion
@@ -321,6 +337,10 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
                     Стоимость = Стоимость,
                     Auto_Service_id = serviceCenter.Id
                 };
+                if (!string.IsNullOrEmpty(PhotoPath))
+                {
+                    servise.Фотография = File.ReadAllBytes(PhotoPath);
+                }
 
                 _serviseRepository.Create(servise);
                 _serviseRepository.Save();
@@ -370,6 +390,20 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
         #endregion
 
 
+
+        private void BrowsePhoto(object obj)
+        {
+            var dialog = new OpenFileDialog
+            {
+                Filter = "Image files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png|All files (*.*)|*.*",
+                Multiselect = false
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                PhotoPath = dialog.FileName;
+            }
+        }
 
 
 

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Курсовая_на_Майкрософте.Forms.Admin.The_common_window"
         xmlns:admin="clr-namespace:Курсовая_на_Майкрософте.ViewModels.Admin"
         mc:Ignorable="d"
-        Title="The_common_window" Height="450" Width="800"
+        Title="Администратор" Height="450" Width="800"
         Icon="/View/vecteezy_car-services-automotive-logo-design-template_12188355.jpg">
 
     <Grid Style="{DynamicResource GridBackgroundStyle}">

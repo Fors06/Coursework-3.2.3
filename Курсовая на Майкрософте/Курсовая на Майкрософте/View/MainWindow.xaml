@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Курсовая_на_Майкрософте"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="Авторизация" Height="450" Width="800"
         Icon="/View/vecteezy_car-services-automotive-logo-design-template_12188355.jpg">
 
     <Window.InputBindings>
@@ -98,6 +98,7 @@
 
 
             <Button Command="{Binding LoginCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                     Content="Вход" HorizontalAlignment="Center" VerticalAlignment="Center" Width="130" Height="27"
                     Foreground="White" BorderBrush="White" Background="{x:Null}"
                     Style="{StaticResource MaterialDesignFlatDarkBgButton}"

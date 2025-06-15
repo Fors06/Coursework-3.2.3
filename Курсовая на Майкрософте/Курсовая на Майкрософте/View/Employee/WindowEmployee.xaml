@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Курсовая_на_Майкрософте.View.Client"
         xmlns:local2="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
         mc:Ignorable="d"
-        Title="WindowEmployee" Height="450" Width="800"
+        Title="Управление заказами" Height="450" Width="800"
         Icon="/View/vecteezy_car-services-automotive-logo-design-template_12188355.jpg">
 
     <Window.Resources>

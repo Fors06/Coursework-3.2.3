@@ -1,15 +1,17 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using RequestDataAccess;
+using RequestDataAccess.Entity;
+using RequestDataAccess.User;
 using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using Курсовая_на_Майкрософте.Forms.Admin.The_common_window;
-using Microsoft.EntityFrameworkCore;
 using Курсовая_на_Майкрософте.Forms.Admin.The_common_window.Pages;
-using RequestDataAccess;
-using RequestDataAccess.Entity;
+using Курсовая_на_Майкрософте.View;
+using Курсовая_на_Майкрософте.View.Client;
 using Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdminViewModels;
-using RequestDataAccess.User;
 
 // Импортируем DAL-пространство имен
 
@@ -90,10 +92,33 @@ namespace Курсовая_на_Майкрософте.ViewModels
                             Role = user.User_Typeid.Роль
                         };
 
-                        var adminWindow = new The_common_window();
+                        //var adminWindow = new The_common_window();
 
-                        adminWindow.Show();
-                        Application.Current.MainWindow.Close();
+                        //adminWindow.Show();
+                        //Application.Current.MainWindow.Close();
+
+                        var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
+
+                        if (currentWindow != null)
+                        {
+                            var clientWindow = new The_common_window(); // Создаем новое окно клиента
+                            clientWindow.Show();                   // Показываем новое окно
+
+                            currentWindow.Close();                 // Закрываем текущее окно администратора
+                        }
+                    }
+
+                    else if(user.User_Typeid.Роль == "Сотрудник")
+                    {
+                        var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
+
+                        if (currentWindow != null)
+                        {
+                            var clientWindow = new WindowEmployee(); // Создаем новое окно клиента
+                            clientWindow.Show();                   // Показываем новое окно
+
+                            currentWindow.Close();                 // Закрываем текущее окно администратора
+                        }
                     }
                     else MessageBox.Show("Пользователь не найден", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Warning);
 
