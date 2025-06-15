@@ -105,6 +105,7 @@ CREATE TABLE Услуги (
     Наименование VARCHAR(100) NOT NULL,
     Описание TEXT NOT NULL,
     Стоимость DECIMAL(10, 2) NOT NULL,
+	Фотография VARBINARY(MAX),
     Auto_Service_id INT NOT NULL,
     FOREIGN KEY (Auto_Service_id) REFERENCES Автосервисная(Id)
 );
