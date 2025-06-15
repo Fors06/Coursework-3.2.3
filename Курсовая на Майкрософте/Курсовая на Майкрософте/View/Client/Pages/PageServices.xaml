@@ -17,7 +17,7 @@
                         <StackPanel Margin="10">
                             <Border Margin="10" Padding="10" Background="#EFEFEF" CornerRadius="5">
                                 <StackPanel>
-                                    <Image Source="/Data/Картинки/Для окна клмента.jpg" Stretch="UniformToFill" Height="150" Margin="0,0,0,10"/>
+                                    <Image Source="{Binding Фотография}" Stretch="None" Height="150" Margin="0,0,0,10"/>
                                     <TextBlock Text="{Binding Наименование}" FontSize="18" FontWeight="Medium" Margin="0,0,0,5"/>
                                     <TextBlock Text="{Binding Описание}" FontSize="14" TextWrapping="Wrap" Margin="0,0,0,10"/>
                                     <TextBlock Text="{Binding Стоимость, StringFormat='от {0} руб. '}" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"/>

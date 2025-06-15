@@ -28,59 +28,63 @@
 
         <!-- Основная сетка с иконками и текстом -->
         <ScrollViewer Grid.Row="2" Margin="20,20,20,20" VerticalScrollBarVisibility="Auto">
-            <Grid>
+            <Grid Height="684">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <!-- Первый ряд -->
-                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center">
+                <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,124" Width="245">
                     <materialDesign:PackIcon Kind="Wrench" Width="50" Height="50" Foreground="Red"/>
                     <TextBlock FontSize="16" Text="Работы выполняются по технологии с применением спец. инструмента" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0"/>
                 </StackPanel>
-                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center">
+                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,124" Width="231">
                     <materialDesign:PackIcon Kind="Clock" Width="50" Height="50" Foreground="Red"/>
                     <TextBlock FontSize="16" Text="Работаем с 8.00 утра. Выдача автомобиля точно в указанный срок" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0"/>
                 </StackPanel>
-                <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center">
+                <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,124" Width="212">
                     <materialDesign:PackIcon Kind="Gift" Width="50" Height="50" Foreground="Red"/>
                     <TextBlock FontSize="16" Text="Подарки при каждом визите" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0"/>
                 </StackPanel>
 
                 <!-- Второй ряд -->
-                <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center">
+                <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,104" Width="175">
                     <materialDesign:PackIcon Kind="TextBoxCheckOutline" Width="50" Height="50" Foreground="Red"/>
                     <TextBlock FontSize="16" Text="Гарантия 6 месяцев на выполненные работы и запасные части" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0"/>
                 </StackPanel>
-                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center">
+                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,104" Width="197">
                     <materialDesign:PackIcon Kind="Coffee" Width="50" Height="50" Foreground="Red"/>
                     <TextBlock FontSize="16" Text="Ароматный кофе, который поднимет настроение" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0"/>
                 </StackPanel>
-                <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center">
+                <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,0,104" Width="182">
                     <materialDesign:PackIcon Kind="Car" Width="50" Height="50" Foreground="Red"/>
                     <TextBlock FontSize="16" Text="Зона ожидания с мягкой мебелью и интернетом" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0"/>
                 </StackPanel>
 
                 <!-- Третий ряд -->
-                <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Center">
+                <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Center" Width="217">
                     <materialDesign:PackIcon Kind="Camera" Width="50" Height="50" Foreground="Red"/>
                     <TextBlock FontSize="16" Text="Предоставляем фото и видео фиксацию неисправностей" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0"/>
                 </StackPanel>
-                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Center">
+                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Center" Width="237">
                     <materialDesign:PackIcon Kind="Wrench" Width="50" Height="50" Foreground="Red"/>
                     <TextBlock FontSize="16" Text="Бесплатный осмотр автомобиля и рекомендации" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0"/>
                 </StackPanel>
-                <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Center">
+                <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Center" Width="196">
                     <materialDesign:PackIcon Kind="Car" Width="50" Height="50" Foreground="Red"/>
                     <TextBlock FontSize="16" Text="Присутствие в ремзоне по желанию, консультация с мастером" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0"/>
                 </StackPanel>
+
+                <Button Content="Оставить заявку" Grid.Row="3" Grid.Column="2"
+                        Style="{StaticResource ButtonStyle}" Margin="5,5,5,5"/>
             </Grid>
         </ScrollViewer>
     </Grid>

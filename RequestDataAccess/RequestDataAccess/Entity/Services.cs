@@ -20,6 +20,9 @@ namespace RequestDataAccess.Entity
         public string Описание { get; set; } = String.Empty;
         [Column("Стоимость")]
         public decimal? Стоимость { get; set; }
+        [Column("Фотография")]
+        public byte[] Фотография { get; set; }
+
         [Column("Auto_Service_id")]
         public int Auto_Service_id { get; set; }
 
