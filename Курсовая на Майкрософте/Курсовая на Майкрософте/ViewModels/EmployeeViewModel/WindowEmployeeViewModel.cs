@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using Курсовая_на_Майкрософте.View.Client;
 using Курсовая_на_Майкрософте.View.Employee;
 using Курсовая_на_Майкрософте.ViewModels.EmployeeViewModel.Окна_для_изменений;
 
@@ -31,6 +32,14 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
 
         public ICommand OpenCreateOrderFormCommand => new RelayCommand(OpenCreateOrderForm);
         public ICommand OpenEditOrderFormCommand => new RelayCommand(OpenEditOrderForm);
+        private ICommand _openSecondWindowCommand;
+        public ICommand GoToEntranceCommand
+        {
+            get
+            {
+                return _openSecondWindowCommand ??= new RelayCommand(GoToEntrance);
+            }
+        }
 
         // Коллекция заказов
         public ObservableCollection<Order> CompletedAndCanceledOrders { get; set; } = new ObservableCollection<Order>();
@@ -320,6 +329,29 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             {
                
             }
+        }
+
+
+        public void GoToEntrance(object obj)
+        {
+            // Создаем новое окно
+            ClientWindow secondWindow = new ClientWindow();
+
+            // Закрываем текущее окно
+            Application.Current.MainWindow.Close();
+
+            // Открываем новое окно
+            secondWindow.Show();
+
+            //var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
+
+            //if (currentWindow != null)
+            //{
+            //    var clientWindow = new ClientWindow(); // Создаем новое окно клиента
+            //    clientWindow.Show();                   // Показываем новое окно
+
+            //    currentWindow.Close();                 // Закрываем текущее окно администратора
+            //}
         }
 
         //private readonly ApplicationContext _context;

@@ -12,7 +12,7 @@
     <Window.InputBindings>
         <KeyBinding Key="Enter" Command="{Binding LoginCommand}" />
     </Window.InputBindings>
-    
+
     <!-- 
     <Window.Resources>
         <SolidColorBrush x:Key="CheckBoxStroke" Color="White"/>
@@ -106,5 +106,7 @@
         </Grid>
         <TextBox  HorizontalAlignment="Left" Margin="16,121,0,0" TextWrapping="Wrap" Text="solo@company.ru" VerticalAlignment="Top" Width="177" />
         <TextBox  HorizontalAlignment="Left" Margin="16,166,0,0" TextWrapping="Wrap" Text="solovyov123" VerticalAlignment="Top" Width="177"/>
+        <TextBox HorizontalAlignment="Left" Margin="563,121,0,0" TextWrapping="Wrap" Text="polya@company.ru" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="563,157,0,0" TextWrapping="Wrap" Text="polyakova123" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>

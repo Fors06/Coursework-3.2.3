@@ -63,7 +63,7 @@
                 <Grid VerticalAlignment="top" HorizontalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40" />
-                        <RowDefinition Height="{Binding ActHeight}" />
+    
                     </Grid.RowDefinitions>
 
                     <!--Верхняя панель-->
@@ -86,13 +86,6 @@
                         </DockPanel>
 
                     </extToolkit1:ColorZone>
-
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                            <ContentControl x:Name="ContentField" Content="{Binding CurrentControl}" Opacity="{Binding FrameOpacity}" MaxHeight="{Binding ActHeight}"/>
-                        </ScrollViewer>
-
-                    </StackPanel>
 
                 </Grid>
                 <Frame Name="MainFrame" Margin="0,40,0,0" NavigationUIVisibility="Hidden"/>

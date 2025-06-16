@@ -9,6 +9,30 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HomePageClient">
 
+    <Page.Resources>
+        <!-- Шаблон для отображения ошибок валидации -->
+        <Style TargetType="TextBox">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                    <Setter Property="BorderBrush" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Шаблон для отображения ошибок валидации -->
+        <ControlTemplate x:Key="ValidationErrorTemplate">
+            <StackPanel Orientation="Vertical">
+                <AdornedElementPlaceholder/>
+                <TextBlock Foreground="Red" FontWeight="Bold" FontSize="12" Margin="5,0,0,0">
+                    <TextBlock.Text>
+                        <Binding Path="ErrorContent"/>
+                    </TextBlock.Text>
+                </TextBlock>
+            </StackPanel>
+        </ControlTemplate>
+    </Page.Resources>
+
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -87,16 +111,43 @@
                 <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Vertical" Height="348" VerticalAlignment="Center" Background="#FF333333" >
                     <TextBlock FontSize="20" FontWeight="Bold" Foreground="White" Text="Контактные данные" HorizontalAlignment="Center"/>
                     <TextBlock FontSize="14" Foreground="White" Text="Оставьте контактные данные и мы обязательно свяжемся с вами" HorizontalAlignment="Center"/>
-                    <TextBox materialDesign:HintAssist.Hint="Имя" Foreground="White" BorderBrush="#FFABADB3" Style="{StaticResource TextBoxStyle}"  Margin="0,20,0,0" Width="300" HorizontalAlignment="Center" Text="{Binding Имя, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBox materialDesign:HintAssist.Hint="Телефон" Foreground="White" BorderBrush="#FFABADB3" Style="{StaticResource TextBoxStyle}" Margin="0,20,0,0" Width="300" HorizontalAlignment="Center" Text="{Binding Телефон, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox materialDesign:HintAssist.Hint="Имя" Foreground="White" BorderBrush="#FFABADB3" Style="{StaticResource TextBoxStyle}"  Margin="0,20,0,0" Width="300" HorizontalAlignment="Center" Text="{Binding Имя, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <AdornedElementPlaceholder/>
+                                    <TextBlock Foreground="Red" FontWeight="Bold" FontSize="12" Margin="5,0,0,0">
+                                        <TextBlock.Text>
+                                            <Binding Path="ErrorContent"/>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </TextBox>
+
+                    <TextBox materialDesign:HintAssist.Hint="Телефон" Foreground="White" BorderBrush="#FFABADB3" Style="{StaticResource TextBoxStyle}" Margin="0,20,0,0" Width="300" HorizontalAlignment="Center" Text="{Binding Телефон, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <AdornedElementPlaceholder/>
+                                    <TextBlock Foreground="Red" FontWeight="Bold" FontSize="12" Margin="5,0,0,0">
+                                        <TextBlock.Text>
+                                            <Binding Path="ErrorContent"/>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </TextBox>
                     <TextBox materialDesign:HintAssist.Hint="Комментарий" Foreground="White" BorderBrush="#FFABADB3"
-                             Style="{StaticResource TextBoxStyle}" Margin="0,20,0,0" Width="300" Height="100" 
-                             HorizontalAlignment="Center" BorderThickness="1,1,1,1" 
-                             Text="{Binding Комментарий, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             HorizontalContentAlignment="Left" VerticalContentAlignment="Top" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
+          Style="{StaticResource TextBoxStyle}" Margin="0,20,0,0" Width="300" Height="100" 
+          HorizontalAlignment="Center" BorderThickness="1,1,1,1" 
+          Text="{Binding Комментарий, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          HorizontalContentAlignment="Left" VerticalContentAlignment="Top" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
                     <!-- Кнопка отправки -->
                     <Button Content="Отправить"
-                            Style="{StaticResource ButtonStyle}" Margin="12,5,11,5" Width="455" Command="{Binding SendCommand}"/>
+         Style="{StaticResource ButtonStyle}" Margin="12,5,11,5" Width="455" Command="{Binding SendCommand}"/>
                 </StackPanel>
 
             </Grid>

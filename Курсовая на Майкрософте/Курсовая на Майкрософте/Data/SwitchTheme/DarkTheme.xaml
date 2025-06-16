@@ -22,7 +22,7 @@
     <Style x:Key="GridBackgroundStyle" TargetType="{x:Type Grid}">
         <Setter Property="Background" Value="{StaticResource  BackgroundBrush}"/>
     </Style>
-    
+
     <!-- Задний фон у Page -->
     <Style TargetType="Grid" x:Key="GridPageStyle">
         <Setter Property="Background" Value="#FF1E2C42"/>

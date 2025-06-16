@@ -37,15 +37,14 @@ namespace Курсовая_на_Майкрософте.ViewModels.ClientViewMode
 
         private void GoToEntrance(object obj)
         {
-            var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
+            // Создаем новое окно
+            MainWindow secondWindow = new MainWindow();
 
-            if (currentWindow != null)
-            {
-                var clientWindow = new MainWindow(); // Создаем новое окно клиента
-                clientWindow.Show();                   // Показываем новое окно
+            // Закрываем текущее окно
+            Application.Current.MainWindow.Close();
 
-                currentWindow.Close();                 // Закрываем текущее окно администратора
-            }
+            // Открываем новое окно
+            secondWindow.Show();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
