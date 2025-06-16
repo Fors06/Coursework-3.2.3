@@ -2,19 +2,17 @@
 using RequestDataAccess.Entity;
 using RequestDataAccess.Repository;
 using RequestDataAccess.Repository.Abstraction;
-using System.Collections;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Курсовая_на_Майкрософте;
 
-public class HomePageClientViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
+public class HomePageClientViewModel : INotifyPropertyChanged
 {
     ApplicationContext _context;
 
@@ -22,7 +20,7 @@ public class HomePageClientViewModel : INotifyPropertyChanged, INotifyDataErrorI
 
     private string _имя;
     private string _телефон;
-    private string _комментарий;
+    private string _кооментарий;
 
     private Services _selectedService; 
     private BitmapImage _image;
@@ -35,7 +33,6 @@ public class HomePageClientViewModel : INotifyPropertyChanged, INotifyDataErrorI
         {
             _имя = value;
             OnPropertyChanged(nameof(Имя));
-            ValidateProperty(nameof(Имя), value);
         }
     }
 
@@ -46,22 +43,21 @@ public class HomePageClientViewModel : INotifyPropertyChanged, INotifyDataErrorI
         {
             _телефон = value;
             OnPropertyChanged(nameof(Телефон));
-            ValidateProperty(nameof(Телефон), value);
         }
     }
 
     public string Комментарий
     {
-        get => _комментарий;
+        get => _кооментарий;
         set
         {
-            _комментарий = value;
+            _кооментарий = value;
             OnPropertyChanged(nameof(Комментарий));
         }
     }
     #endregion
 
-
+ 
     public Services SelectedService
     {
         get => _selectedService;
@@ -117,10 +113,9 @@ public class HomePageClientViewModel : INotifyPropertyChanged, INotifyDataErrorI
     private RelayCommand _sendCommand;
     public ICommand SendCommand => _sendCommand ??= new RelayCommand(SendEmail);
 
-
     private void SendEmail(object obj)
     {
-        if (!HasErrors)
+        try
         {
             // Данные для отправки
             string fromEmail = "iv_artem06@mail.ru";
@@ -140,60 +135,19 @@ public class HomePageClientViewModel : INotifyPropertyChanged, INotifyDataErrorI
 
             MessageBox.Show("Заявка успешно отправлена!");
         }
-        else
+        catch (Exception ex)
         {
-            MessageBox.Show("Исправьте ошибки в данных перед отправкой.");
+            MessageBox.Show($"Ошибка при отправке заявки: {ex}");
         }
-    }
-
-    public bool HasErrors => _errors.Count > 0;
-
-    private void ValidateProperty(string propertyName, object value)
-    {
-        _errors.Remove(propertyName);
-
-        switch (propertyName)
-        {
-            case nameof(Имя):
-                if (string.IsNullOrWhiteSpace((string)value))
-                    AddError(nameof(Имя), "Имя не может быть пустым");
-                break;
-            case nameof(Телефон):
-                if (string.IsNullOrWhiteSpace((string)value))
-                    AddError(nameof(Телефон), "Телефон не может быть пустым");
-                if (!Regex.IsMatch((string)value, @"^\+?\d{1,3}?[-.\s]?$?(?:\d{2,3})$?[-.\s]?\d{3}[-.\s]?\d{4,7}$"))
-                    AddError(nameof(Телефон), "Некорректный формат телефона");
-                break;
-        }
-
-        ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-    }
-
-    private void AddError(string propertyName, string errorMessage)
-    {
-        if (!_errors.ContainsKey(propertyName))
-            _errors[propertyName] = new List<string>();
-        _errors[propertyName].Add(errorMessage);
     }
 
 
     public event PropertyChangedEventHandler PropertyChanged;
-    public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-
-
-    public IEnumerable GetErrors(string? propertyName)
-    {
-        if (_errors.ContainsKey(propertyName))
-            return _errors[propertyName];
-        return null;
-    }
-    private Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
-
-
+   
 }
