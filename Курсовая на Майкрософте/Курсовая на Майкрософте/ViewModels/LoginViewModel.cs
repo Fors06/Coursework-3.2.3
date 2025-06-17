@@ -12,8 +12,7 @@ using Курсовая_на_Майкрософте.Forms.Admin.The_common_window
 using Курсовая_на_Майкрософте.View;
 using Курсовая_на_Майкрософте.View.Client;
 using Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdminViewModels;
-
-// Импортируем DAL-пространство имен
+using Курсовая_на_Майкрософте.Data; // Добавьте пространство имен для диспетчера окон
 
 namespace Курсовая_на_Майкрософте.ViewModels
 {
@@ -51,12 +50,12 @@ namespace Курсовая_на_Майкрософте.ViewModels
         }
 
         public ICommand LoginCommand { get; }
-        public ICommand EnterKeyCommand { get; } 
+        public ICommand EnterKeyCommand { get; }
+
         public LoginViewModel()
         {
             LoginCommand = new RelayCommand(LoginExecute);
             EnterKeyCommand = new RelayCommand(LoginExecute);
-            
         }
 
         public static int LoggedInUserId { get; set; } // Публичное свойство для сохранения идентификатора
@@ -65,23 +64,22 @@ namespace Курсовая_на_Майкрософте.ViewModels
         {
             if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
             {
-                MessageBox.Show("Пожалуйста, введите имя пользователя и пароль.");
+                MessageBox.Show("Пожалуйста, введите имя пользователя и пароль.", "Ошибка авторизации");
                 return;
             }
 
             using (var dbContext = new ApplicationContext())
             {
                 Users user = await dbContext.users
-            .Include(u => u.User_Typeid)
-            .FirstOrDefaultAsync(u => u.Email == Username && u.Пароль == Password);
+                    .Include(u => u.User_Typeid)
+                    .FirstOrDefaultAsync(u => u.Email == Username && u.Пароль == Password);
 
                 if (user != null)
                 {
-
                     // Проводим проверку роли и уровня доступа
                     if (user.User_Typeid.Роль == "Администратор")
                     {
-                        // Сохраняем полную информацию о пользователе
+                        // Формируем профиль пользователя
                         CurrentUserInfo.LoggedInUser = new UserProfile
                         {
                             FirstName = user.Имя,
@@ -92,41 +90,53 @@ namespace Курсовая_на_Майкрософте.ViewModels
                             Role = user.User_Typeid.Роль
                         };
 
-                        //var adminWindow = new The_common_window();
+                        //// Используем диспетчер окон для открытия нового окна
+                        //WindowManager.SwitchWindow(new The_common_window()); // Перейти к окну админа
 
-                        //adminWindow.Show();
-                        //Application.Current.MainWindow.Close();
 
                         var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
 
-                        if (currentWindow != null)
-                        {
-                            var clientWindow = new The_common_window(); // Создаем новое окно клиента
-                            clientWindow.Show();                   // Показываем новое окно
+                        // Создаем новое окно Employee
+                        The_common_window employeeWindow = new The_common_window();
 
-                            currentWindow.Close();                 // Закрываем текущее окно администратора
-                        }
+                        // Назначаем новое окно главным окном приложения
+                        Application.Current.MainWindow = employeeWindow;
+
+                        // Показываем новое окно
+                        employeeWindow.Show();
+
+                        // Закрываем текущее окно (LoginWindow)
+                        currentWindow.Close();
+
                     }
-
-                    else if(user.User_Typeid.Роль == "Сотрудник")
+                    else if (user.User_Typeid.Роль == "Сотрудник")
                     {
+                        //// Используем диспетчер окон для открытия нового окна
+                        //WindowManager.SwitchWindow(new WindowEmployee()); // Перейти к окну сотрудника
+
+                        // Получить текущее окно (предполагаем, что LoginWindow — текущее окно)
                         var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
 
-                        if (currentWindow != null)
-                        {
-                            var clientWindow = new WindowEmployee(); // Создаем новое окно клиента
-                            clientWindow.Show();                   // Показываем новое окно
+                        // Создаем новое окно Employee
+                        WindowEmployee employeeWindow = new WindowEmployee();
 
-                            currentWindow.Close();                 // Закрываем текущее окно администратора
-                        }
+                        // Назначаем новое окно главным окном приложения
+                        Application.Current.MainWindow = employeeWindow;
+
+                        // Показываем новое окно
+                        employeeWindow.Show();
+
+                        // Закрываем текущее окно (LoginWindow)
+                        currentWindow.Close();
                     }
-                    else MessageBox.Show("Пользователь не найден", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Warning);
-
-
+                    else
+                    {
+                        MessageBox.Show("Пользователь не имеет прав доступа.", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Пользователь не найден", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Неверные данные для входа.", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
         }

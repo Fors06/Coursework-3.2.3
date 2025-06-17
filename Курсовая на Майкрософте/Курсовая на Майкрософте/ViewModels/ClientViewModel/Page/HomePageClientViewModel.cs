@@ -138,9 +138,18 @@ public class HomePageClientViewModel : INotifyPropertyChanged, INotifyDataErrorI
             };
 
             MailMessage mailMessage = new MailMessage(fromEmail, toEmail, subject, body);
-            smtpClient.Send(mailMessage);
 
-            MessageBox.Show("Заявка успешно отправлена!");
+            try
+            {
+                smtpClient.Send(mailMessage); // Отправляем письмо
+
+                MessageBox.Show("Заявка успешно отправлена!");
+            }
+            catch (SmtpException ex)
+            {
+                // Обрабатываем ошибку отправки, возможно отсутствие интернета
+                MessageBox.Show($"Ошибка отправки электронной почты: {ex.Message}");
+            }
         }
         else
         {

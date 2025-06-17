@@ -10,6 +10,7 @@ using Курсовая_на_Майкрософте.Forms.Admin.The_common_window
 using Курсовая_на_Майкрософте.View;
 using Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdminViewModels;
 using Курсовая_на_Майкрософте.Data.SwitchTheme;
+using Курсовая_на_Майкрософте.View.Client;
 
 namespace Курсовая_на_Майкрософте
 {

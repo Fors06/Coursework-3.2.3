@@ -17,6 +17,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="bin\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <None Remove="bin\**" />
+    <Page Remove="bin\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="View\vecteezy_car-services-automotive-logo-design-template_12188355.jpg" />
     <None Remove="Фон авторизации.jpeg" />
   </ItemGroup>
@@ -39,6 +45,7 @@
   <ItemGroup>
     <Resource Include="View\vecteezy_car-services-automotive-logo-design-template_12188355.jpg" />
     <Resource Include="Фон авторизации.jpeg" />
+    <Resource Include="Data\Картинки\Для окна клмента.jpg" />
   </ItemGroup>
   <ItemGroup Condition="$(VisualStudioVersion) == '17.0'">
     <Reference Include="Microsoft.Data.Tools.Schema.Sql.UnitTesting, Version=17.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Курсовая_на_Майкрософте.Data;
 using Курсовая_на_Майкрософте.View;
 using Курсовая_на_Майкрософте.View.Client;
 using Курсовая_на_Майкрософте.View.Client.Pages;
@@ -38,13 +39,28 @@ namespace Курсовая_на_Майкрософте.ViewModels.ClientViewMode
         private void GoToEntrance(object obj)
         {
             // Создаем новое окно
-            MainWindow secondWindow = new MainWindow();
+            //WindowManager.SwitchWindow(new MainWindow());
 
-            // Закрываем текущее окно
-            Application.Current.MainWindow.Close();
+            //MainWindow mainWindow = new MainWindow();
+            //Application.Current.MainWindow = mainWindow;
+            //mainWindow.Show();
+            //ClientWindow clientWindow = new ClientWindow();
+            //clientWindow.Close();
 
-            // Открываем новое окно
-            secondWindow.Show();
+
+            var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
+
+            // Создаем новое окно Employee
+            MainWindow employeeWindow = new MainWindow();
+
+            // Назначаем новое окно главным окном приложения
+            Application.Current.MainWindow = employeeWindow;
+
+            // Показываем новое окно
+            employeeWindow.Show();
+
+            // Закрываем текущее окно (LoginWindow)
+            currentWindow.Close();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

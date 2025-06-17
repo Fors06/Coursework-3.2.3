@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using Курсовая_на_Майкрософте.Data;
+using Курсовая_на_Майкрософте.View;
 using Курсовая_на_Майкрософте.View.Client;
 using Курсовая_на_Майкрософте.View.Employee;
 using Курсовая_на_Майкрософте.ViewModels.EmployeeViewModel.Окна_для_изменений;
@@ -334,14 +336,31 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
 
         public void GoToEntrance(object obj)
         {
-            // Создаем новое окно
-            ClientWindow secondWindow = new ClientWindow();
+            //WindowManager.SwitchWindow(new ClientWindow()); 
 
-            // Закрываем текущее окно
-            Application.Current.MainWindow.Close();
 
-            // Открываем новое окно
-            secondWindow.Show();
+            var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
+
+            // Создаем новое окно Employee
+            ClientWindow employeeWindow = new ClientWindow();
+
+            // Назначаем новое окно главным окном приложения
+            Application.Current.MainWindow = employeeWindow;
+
+            // Показываем новое окно
+            employeeWindow.Show();
+
+            // Закрываем текущее окно (LoginWindow)
+            currentWindow.Close();
+
+
+            //ClientWindow secondWindow = new ClientWindow();
+
+            //// Закрываем текущее окно
+            //Application.Current.MainWindow.Close();
+
+
+            //secondWindow.Show();
 
             //var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
 
