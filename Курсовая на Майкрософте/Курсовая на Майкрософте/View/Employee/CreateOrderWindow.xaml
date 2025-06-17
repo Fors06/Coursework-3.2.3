@@ -33,11 +33,10 @@
             <!-- Вторая строка -->
             <RowDefinition Height="55*"/>
             <!-- Третья строка -->
-            <RowDefinition Height="55*"/>
+            <RowDefinition Height="126*"/>
             <!-- Четвертая строка -->
-            <RowDefinition Height="63*"/>
             <!-- Пятая строка -->
-            <RowDefinition Height="72*"/>
+            <RowDefinition Height="64*"/>
             <!-- Шестая строка -->
             <!-- Седьмая строка -->
             <RowDefinition Height="55*"/>
@@ -48,12 +47,14 @@
             <!-- Первый столбец -->
             <ColumnDefinition Width="157*"/>
             <ColumnDefinition Width="91*"/>
-            <ColumnDefinition Width="150*"/>
-            <ColumnDefinition Width="278*"/>
+            <ColumnDefinition Width="51*"/>
+            <ColumnDefinition Width="99*"/>
+            <ColumnDefinition Width="73*"/>
+            <ColumnDefinition Width="205*"/>
             <!-- Второй столбец -->
         </Grid.ColumnDefinitions>
 
-        <Label Content="Клиент:" Grid.Column="0" Foreground="White" FontSize="16" Margin="5,0,5,0" Height="30" VerticalAlignment="Center"/>
+        <Label Content="Клиент:" Grid.Column="0" Foreground="White" FontSize="16" Margin="5,24,5,0" Height="30" VerticalAlignment="Top"/>
         <TextBox Style="{StaticResource MaterialDesignTextBox}"
                  materialDesign:HintAssist.Hint="Фамилия"
                  Foreground="White" BorderBrush="White" Grid.Column="1" Margin="5,5,5,0" FontSize="16" Height="63" VerticalAlignment="Top"
@@ -63,21 +64,21 @@
                  Style="{StaticResource MaterialDesignTextBox}"
                  materialDesign:HintAssist.Hint="Имя"
                  BorderBrush="White" Foreground="White"
-                 Margin="10,5,107,0" Height="63" VerticalAlignment="Top"
+                 Margin="10,5,4,0" Height="63" VerticalAlignment="Top"
                  Text="{Binding ClientFirstName, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"/>
 
-        <TextBox Grid.Column="3" FontSize="16" 
+        <TextBox Grid.Column="4" FontSize="16" 
                  Style="{StaticResource MaterialDesignTextBox}"
                  materialDesign:HintAssist.Hint="Отчество"
                  BorderBrush="White" Foreground="White"
-                 Margin="62,5,216,0" Height="63" VerticalAlignment="Top"
+                 Margin="11,5,11,0" Height="63" VerticalAlignment="Top"
                  Text="{Binding ClientMiddleName, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"/>
 
-        <TextBox Grid.Column="4" FontSize="16"
+        <TextBox Grid.Column="6" FontSize="16"
                  Style="{StaticResource MaterialDesignTextBox}"
                  materialDesign:HintAssist.Hint="Телефон"
-                 BorderBrush="White" Foreground="White" Margin="86,0,39,10"
-                 Text="{Binding Телефон, UpdateSourceTrigger=PropertyChanged}"/>
+                 BorderBrush="White" Foreground="White" Margin="13,0,39,0"
+                 Text="{Binding Телефон, UpdateSourceTrigger=PropertyChanged}" Height="68" VerticalAlignment="Top"/>
 
         <Label Content="Мастер:" Grid.Column="0" Foreground="White" FontSize="16" Margin="5,10,5,0" Grid.Row="1" Height="32" VerticalAlignment="Top"/>
         <ComboBox Grid.Row="1" Grid.Column="1" Margin="5,5,10,0" FontSize="16" VerticalAlignment="Top"
@@ -91,22 +92,22 @@
                   materialDesign:HintAssist.Hint="Марка"
                   Foreground="White" BorderBrush="White" 
                   SelectedValue="{Binding CarBrand}" ItemsSource="{Binding AvailableBrands}"
-                  Grid.Row="2" Grid.Column="1" Margin="5,0,10,0" FontSize="16" Height="45"/>
+                  Grid.Row="2" Grid.Column="1" Margin="5,5,10,0" FontSize="16" Height="45" VerticalAlignment="Top"/>
 
         <ComboBox Style="{StaticResource MaterialDesignComboBox}"
                   materialDesign:HintAssist.Hint="Модель"
                   Foreground="White" BorderBrush="White" 
                   SelectedValue="{Binding CarModel}" ItemsSource="{Binding AvailableModels}"
-                  Grid.Row="2" Grid.Column="2" Margin="10,0,107,0" FontSize="16" Height="45" Grid.ColumnSpan="2"/>
+                  Grid.Row="2" Grid.Column="2" Margin="10,5,4,0" FontSize="16" Height="45" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
 
         <TextBox Style="{StaticResource MaterialDesignTextBox}"
                  materialDesign:HintAssist.Hint="Год выпуска"
                  Foreground="White" BorderBrush="White" 
-                 Grid.Row="2" Grid.Column="4" Margin="10,0,39,0" FontSize="16" Height="45" VerticalAlignment="Center"
-                 Text="{Binding CarYear, UpdateSourceTrigger=PropertyChanged}"/>
+                 Grid.Row="2" Grid.Column="5" Margin="10,5,39,0" FontSize="16" Height="45" VerticalAlignment="Top"
+                 Text="{Binding CarYear, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"/>
 
-        <Label Content="Сервис-центр:" Grid.Row="3" Grid.Column="0" Foreground="White" FontSize="16" Margin="5,0,3,0" Height="35" VerticalAlignment="Center"/>
-        <StackPanel Orientation="Vertical" Grid.Row="3" Grid.RowSpan="3" Grid.Column="1" Margin="5,5,5,62" Grid.ColumnSpan="2">
+        <Label Content="Сервис-центр:" Grid.Row="3" Grid.Column="0" Foreground="White" FontSize="16" Margin="5,11,3,0" Height="35" VerticalAlignment="Top"/>
+        <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="1" Margin="5,5,5,2" Grid.ColumnSpan="2">
             <TextBox x:Name="Адрес"
                      materialDesign:HintAssist.Hint="Адрес..."
                      Style="{StaticResource MaterialDesignTextBox}"
@@ -124,7 +125,7 @@
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      ScrollViewer.VerticalScrollBarVisibility="Auto"
                      MaxHeight="200"
-                     SelectedItem="{Binding SelectedCarCenter}" Height="82">
+                     SelectedItem="{Binding SelectedCarCenter}" Height="74">
                 <!-- Изменили привязку -->
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -136,21 +137,21 @@
 
         <DatePicker Style="{StaticResource MaterialDesignDatePicker}" materialDesign:HintAssist.Hint="Дата начала"
                     Foreground="White" BorderBrush="White"
-                    Grid.Row="5" Grid.Column="1" FontSize="16"  Margin="10,0,5,0"
+                    Grid.Row="4" Grid.Column="1" FontSize="16"  Margin="15,0,5,0"
                     SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}" Height="45" VerticalAlignment="Top"/>
 
-        <Label Content="Название услуги:" Grid.Row="3" Grid.Column="3" Foreground="White" FontSize="16" Margin="10,0,5,0" Height="30" VerticalAlignment="Center"/>
-        <ComboBox Grid.Row="3" Grid.Column="4" Margin="5,0,39,0" FontSize="16"
+        <Label Content="Название услуги:" Grid.Row="3" Grid.Column="3" Foreground="White" FontSize="16" Margin="10,13,5,0" Height="30" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <ComboBox Grid.Row="3" Grid.Column="5" Margin="5,9,39,0" FontSize="16"
                   Style="{StaticResource MaterialDesignComboBox}"
                   BorderBrush="White" Foreground="White"
-                  ItemsSource="{Binding Services}" DisplayMemberPath="Наименование" SelectedItem="{Binding SelectedService}" Height="38"/>
+                  ItemsSource="{Binding Services}" DisplayMemberPath="Наименование" SelectedItem="{Binding SelectedService}" Height="38" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
 
         <TextBox Style="{StaticResource MaterialDesignTextBox}"
                  materialDesign:HintAssist.Hint="Стоимость"
                  Foreground="White" BorderBrush="White"
-                 Grid.Row="5" Grid.Column="4" Margin="10,0,39,0" FontSize="16"
-                 Text="{Binding SelectedService.Стоимость, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="45" VerticalAlignment="Top"/>
+                 Grid.Row="4" Grid.Column="5" Margin="0,0,49,0" FontSize="16"
+                 Text="{Binding SelectedService.Стоимость, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="45" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
 
-        <Button Content="Сохранить" Style="{StaticResource ButtonStyle}" Command="{Binding SaveOrderCommand}" Grid.Row="6" Margin="111,3,43,0" Grid.ColumnSpan="5" Height="38" VerticalAlignment="Top"/>
+        <Button Content="Сохранить" Style="{StaticResource ButtonStyle}" Command="{Binding SaveOrderCommand}" Grid.Row="5" Margin="111,3,43,0" Grid.ColumnSpan="7" Height="38" VerticalAlignment="Top"/>
     </Grid>
 </Window>

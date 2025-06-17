@@ -34,14 +34,9 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
 
         public ICommand OpenCreateOrderFormCommand => new RelayCommand(OpenCreateOrderForm);
         public ICommand OpenEditOrderFormCommand => new RelayCommand(OpenEditOrderForm);
-        private ICommand _openSecondWindowCommand;
-        public ICommand GoToEntranceCommand
-        {
-            get
-            {
-                return _openSecondWindowCommand ??= new RelayCommand(GoToEntrance);
-            }
-        }
+        public ICommand GoToEntranceCommand => new RelayCommand(GoToEntrance);
+        public ICommand UpdateCommand => new RelayCommand(LoadInitialData);
+    
 
         // Коллекция заказов
         public ObservableCollection<Order> CompletedAndCanceledOrders { get; set; } = new ObservableCollection<Order>();
@@ -147,12 +142,22 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             _malfunctionRepository = new MalfunctionRepository(_context);
 
             // Загрузка начальных данных
-            LoadInitialData();
+            LoadInitialData(null);
         }
 
         // Загрузка начальных данных
-        private void LoadInitialData()
+        private void LoadInitialData(object obj)
         {
+            // Очистка существующих данных
+            ActiveAndAcceptedOrders.Clear();
+            CompletedAndCanceledOrders.Clear();
+            Services.Clear();
+            Cars.Clear();
+            Clients.Clear();
+            Employees.Clear();
+            ServiceCenters.Clear();
+
+            // Загрузка свежих данных
             LoadOrders();
             LoadServices();
             LoadCars();
@@ -262,50 +267,15 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             }
         }
 
-        // Создание нового заказа
-        private void CreateOrder(object parameter)
-        {
-            SelectedOrder = new Order();
-        }
-
-        // Сохранение заказа
-        private void SaveOrder(object parameter)
-        {
-            if (SelectedOrder == null || !ValidateOrder(SelectedOrder)) return;
-
-            if (SelectedOrder.Id > 0)
-            {
-                _orderRepository.Update(SelectedOrder);
-            }
-            else
-            {
-                _orderRepository.Create(SelectedOrder);
-            }
-
-             LoadOrders();
-        }
-
-        // Валидация заказа
-        private bool ValidateOrder(Order order)
-        {
-            if (order.Clients_id == 0 ||
-                order.Master_id == 0 ||
-                order.Auto_Service_id == 0 ||
-                order.Statuses_id == 0 ||
-                order.Auto_Service_id == 0 ||
-                order.Cars_id == 0)
-            {
-                return false;
-            }
-            return true;
-        }
-
         public void OpenCreateOrderForm(object obj)
         {
             // Создаём экземпляр формы создания заказа
             var createOrderWindow = new CreateOrderWindow();
 
-            // Показываем окно как модальное (так пользователь не сможет продолжить работу с главным окном, пока не закроет форму)
+            // Передаем окно в конструктор ViewModel
+            createOrderWindow.DataContext = new CreateOrderViewModel(createOrderWindow);
+
+            // Показываем окно как модальное
             createOrderWindow.ShowDialog();
         }
 
@@ -319,12 +289,12 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             }
 
             var editWindow = new EditOrderWindow(SelectedOrder);
-            editWindow.DataContext = new EditOrderViewModel(SelectedOrder); // Передаем только заказ
+            editWindow.DataContext = new EditOrderViewModel(SelectedOrder, editWindow); // Передаем только заказ
             bool? result = editWindow.ShowDialog();
 
             if (result == true)
             {
-                LoadInitialData();
+                LoadInitialData(null);
                 MessageBox.Show("Данные успешно сохранены.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
@@ -336,9 +306,6 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
 
         public void GoToEntrance(object obj)
         {
-            //WindowManager.SwitchWindow(new ClientWindow()); 
-
-
             var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
 
             // Создаем новое окно Employee
@@ -352,204 +319,10 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
 
             // Закрываем текущее окно (LoginWindow)
             currentWindow.Close();
-
-
-            //ClientWindow secondWindow = new ClientWindow();
-
-            //// Закрываем текущее окно
-            //Application.Current.MainWindow.Close();
-
-
-            //secondWindow.Show();
-
-            //var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
-
-            //if (currentWindow != null)
-            //{
-            //    var clientWindow = new ClientWindow(); // Создаем новое окно клиента
-            //    clientWindow.Show();                   // Показываем новое окно
-
-            //    currentWindow.Close();                 // Закрываем текущее окно администратора
-            //}
+           
         }
 
-        //private readonly ApplicationContext _context;
-        //private readonly IRepository<Order> _orderRepository;
-        //private readonly IRepository<Cars> _carsRepository;
-        //private readonly IRepository<Client> _clientsRepository;
-        //private readonly IRepository<Employee> _employeesRepository;
-        //private readonly IRepository<Car_service_center> _serviceCentersRepository;
-        //private readonly IRepository<Services> _servicesRepository;
-
-        //// Коллекция заказов
-        //public ObservableCollection<Order> Orders { get; set; } = new ObservableCollection<Order>();
-
-        //// Коллекция услуг
-        //public ObservableCollection<Services> Services { get; set; } = new ObservableCollection<Services>();
-
-        //// Коллекция автомобилей
-        //public ObservableCollection<Cars> Cars { get; set; } = new ObservableCollection<Cars>();
-
-        //// Коллекция клиентов
-        //public ObservableCollection<Client> Clients { get; set; } = new ObservableCollection<Client>();
-
-        //// Коллекция сотрудников
-        //public ObservableCollection<Employee> Employees { get; set; } = new ObservableCollection<Employee>();
-
-        //// Коллекция сервисов
-        //public ObservableCollection<Car_service_center> ServiceCenters { get; set; } = new ObservableCollection<Car_service_center>();
-
-        //// Текущий заказ (для редактирования)
-        //private Order _currentOrder;
-        //public Order CurrentOrder
-        //{
-        //    get => _currentOrder;
-        //    set
-        //    {
-        //        _currentOrder = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-
-        //// Команда создания нового заказа
-        //public ICommand CreateOrderCommand { get; }
-
-        //// Команда сохранения заказа
-        //public ICommand SaveOrderCommand { get; }
-
-        //// Конструктор
-        //public WindowEmployeeViewModel()
-        //{
-        //    _context = new ApplicationContext();
-        //    _orderRepository = new OrderRepository(_context);
-        //    _carsRepository = new CarsRepository(_context);
-        //    _clientsRepository = new ClientsRepository(_context);
-        //    _employeesRepository = new EmployeesRepository(_context);
-        //    _serviceCentersRepository = new ServiceCentersRepository(_context);
-        //    _servicesRepository = new ServicesRepository(_context);
-
-        //    // Инициализация команд
-        //    CreateOrderCommand = new RelayCommand(CreateOrder);
-        //    SaveOrderCommand = new RelayCommand(SaveOrder);
-
-        //    // Загрузка начальных данных
-        //    LoadInitialData();
-        //}
-
-        //// Загрузка начальных данных
-        //private async void LoadInitialData()
-        //{
-        //    await LoadOrders();
-        //    await LoadServices();
-        //    await LoadCars();
-        //    await LoadClients();
-        //    await LoadEmployees();
-        //    await LoadServiceCenters();
-        //}
-
-        //// Загрузка заказов
-        //private async Task LoadOrders()
-        //{
-        //    var orders = await _orderRepository.GetAllAsync();
-        //    Orders.Clear();
-        //    foreach (var order in orders)
-        //    {
-        //        Orders.Add(order);
-        //    }
-        //}
-
-        //// Загрузка услуг
-        //private async Task LoadServices()
-        //{
-        //    var services = await _servicesRepository.GetAllAsync();
-        //    Services.Clear();
-        //    foreach (var service in services)
-        //    {
-        //        Services.Add(service);
-        //    }
-        //}
-
-        //// Загрузка автомобилей
-        //private async Task LoadCars()
-        //{
-        //    var cars = await _carsRepository.GetAllAsync();
-        //    Cars.Clear();
-        //    foreach (var car in cars)
-        //    {
-        //        Cars.Add(car);
-        //    }
-        //}
-
-        //// Загрузка клиентов
-        //private async Task LoadClients()
-        //{
-        //    var clients = await _clientsRepository.GetAllAsync();
-        //    Clients.Clear();
-        //    foreach (var client in clients)
-        //    {
-        //        Clients.Add(client);
-        //    }
-        //}
-
-        //// Загрузка сотрудников
-        //private async Task LoadEmployees()
-        //{
-        //    var employees = await _employeesRepository.GetAllAsync();
-        //    Employees.Clear();
-        //    foreach (var employee in employees)
-        //    {
-        //        Employees.Add(employee);
-        //    }
-        //}
-
-        //// Загрузка автосервисов
-        //private async Task LoadServiceCenters()
-        //{
-        //    var centers = await _serviceCentersRepository.GetAllAsync();
-        //    ServiceCenters.Clear();
-        //    foreach (var center in centers)
-        //    {
-        //        ServiceCenters.Add(center);
-        //    }
-        //}
-
-        //// Создание нового заказа
-        //private void CreateOrder(object parameter)
-        //{
-        //    CurrentOrder = new Order();
-        //}
-
-        //// Сохранение заказа
-        //private async void SaveOrder(object parameter)
-        //{
-        //    if (CurrentOrder == null || !ValidateOrder(CurrentOrder)) return;
-
-        //    if (CurrentOrder.Id > 0)
-        //    {
-        //        await _orderRepository.UpdateAsync(CurrentOrder);
-        //    }
-        //    else
-        //    {
-        //        await _orderRepository.CreateAsync(CurrentOrder);
-        //    }
-
-        //    await LoadOrders();
-        //}
-
-        //// Валидация заказа
-        //private bool ValidateOrder(Order order)
-        //{
-        //    if (order.Clients_id == 0 ||
-        //        order.Master_id == 0 ||
-        //        order.Auto_Service_id == 0 ||
-        //        order.Statuses_id == 0 ||
-        //        order.Services_id == 0 ||
-        //        order.Кара_id == 0)
-        //    {
-        //        return false;
-        //    }
-        //    return true;
-        //}
+      
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)

@@ -16,9 +16,13 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
 {
     public class EditOrderViewModel : INotifyPropertyChanged
     {
+        private readonly Window _window;
+
         ApplicationContext _context;
+
         private readonly Order _originalOrder;
         private Order _editedOrder;
+
         private readonly IRepository<Order> _orderRepository;
         private readonly IRepository<Services> _servicesRepository;
         private readonly IRepository<Order_status> _statusRepository;
@@ -28,11 +32,15 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
 
         public List<Order_status> AvailableStatuses { get; private set; }
         public List<Services> Services { get; private set; }
+
         public ICommand SaveOrderCommand => new RelayCommand(SaveOrder);
         public ICommand CancelCommand => new RelayCommand(Cancel);
 
-        public EditOrderViewModel(Order originalOrder)
+
+        public EditOrderViewModel(Order originalOrder, Window window)
         {
+            _window = window;
+
             _context = new ApplicationContext();
             _orderRepository = new OrderRepository(_context);
             _servicesRepository = new ServicesRepository(_context);
@@ -91,6 +99,7 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             }
         }
 
+        #region Поля
         public string НазваниеРаботы
         {
             get => _editedOrder.Servicesid?.Наименование;
@@ -143,23 +152,25 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             }
         }
 
-        
+        #endregion
 
+        #region Команды
         // Команда для сохранения изменений
         private void SaveOrder(object obj)
         {
             try
             {
 
-                MessageBox.Show("SaveOrder");
+                Console.WriteLine("Заказ отправлен на обновление");
                 _orderRepository.Update(_editedOrder);
+                Console.WriteLine("Изменения отправлены в базу данных");
                 _orderRepository.Save();
-
-                DialogResult = true;
+                Console.WriteLine("Данные сохранены");
+                _window.Close();
             }
             catch (Exception ex)
             {
-                DialogResult = false;
+                _window.Close();
                 Console.WriteLine($"Ошибка обновления записи: {ex.Message}");
             }
         }
@@ -180,10 +191,12 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
                 Statuses_id = _originalOrder.Statuses_id,
                 Services_id = _originalOrder.Services_id
             };
-            DialogResult = false;
+            _window.Close();
         }
 
-        public bool? DialogResult { get; set; }
+        #endregion
+
+
 
         // Обработчик изменения свойств
         public event PropertyChangedEventHandler PropertyChanged;

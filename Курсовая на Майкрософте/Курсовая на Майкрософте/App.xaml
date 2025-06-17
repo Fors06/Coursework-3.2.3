@@ -4,9 +4,11 @@
              xmlns:local="clr-namespace:Курсовая_на_Майкрософте"
              xmlns:converters="clr-namespace:Курсовая_на_Майкрософте.Data.Convertes"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             StartupUri="View\Client\ClientWindow.xaml"> 
              
-          <!--   StartupUri="View\Employee\WindowEmployee.xaml"> -->
+ StartupUri="View\Employee\WindowEmployee.xaml">
+    <!--  StartupUri="View\Client\ClientWindow.xaml"> -->
+             
+           
 
         <!--     StartupUri="View\Admin\The common window\The common window.xaml"> -->
 

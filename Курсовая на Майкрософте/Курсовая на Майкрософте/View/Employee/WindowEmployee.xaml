@@ -27,15 +27,15 @@
               HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch"
               BorderThickness="0"
-             Margin="0">
+              Margin="0">
 
             <!-- ЛЕВЫЙ ДРАВЕР (ПОПУТНАЯ ПАНЕЛЬ) -->
             <extToolkit1:DrawerHost.LeftDrawerContent>
                 <StackPanel Margin="0,5,0,5" Width="212" Background="White">
                     <Button Content="Вход" Height="30"
-                         Command="{Binding GoToEntranceCommand}"
-                         CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                         Style="{StaticResource MaterialDesignFlatButton}"/>
+                            Command="{Binding GoToEntranceCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                            Style="{StaticResource MaterialDesignFlatButton}"/>
 
                     <Separator Style="{StaticResource MaterialDesignSeparator}" Margin="10"/>
 
@@ -59,17 +59,18 @@
                 <!-- Верхняя панель -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0">
                     <Button x:Name="ButtonOpen" VerticalAlignment="Top"  Margin="0,0,10,0"
-                         Background="{x:Null}" BorderBrush="{x:Null}" Width="41" Height="26" Padding="0"
-                         Command="{x:Static extToolkit1:DrawerHost.OpenDrawerCommand}"
-                         CommandParameter="{x:Static Dock.Left}">
+                             Background="{x:Null}" BorderBrush="{x:Null}" Width="41" Height="26" Padding="0"
+                             Command="{x:Static extToolkit1:DrawerHost.OpenDrawerCommand}"
+                             CommandParameter="{x:Static Dock.Left}">
                         <extToolkit1:PackIcon Kind="Menu" Foreground="{StaticResource MaterialDesign.Brush.Primary.Dark}" Width="37" Height="28" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Button>
                     <TextBlock Text="Общий обзор:" FontWeight="Bold" Foreground="White" FontSize="16"/>
                     <ListBox Style="{StaticResource MaterialDesignCardsListBox}"
-                          DisplayMemberPath="Description" Width="200" FontSize="16"
-                          Foreground="White" BorderBrush="White"/>
+                             DisplayMemberPath="Description" Width="200" FontSize="16"
+                             Foreground="White" BorderBrush="White"/>
                     <Button Content="Новый заказ" Command="{Binding OpenCreateOrderFormCommand}" Margin="10,0,0,0" Style="{StaticResource ButtonStyle}"/>
                     <Button Content="Редактировать" Command="{Binding OpenEditOrderFormCommand}" Margin="10,0,0,0" Style="{StaticResource ButtonStyle}"/>
+                    <Button Content="Обновить" Command="{Binding UpdateCommand}" Margin="10,0,0,0" Style="{StaticResource ButtonStyle}"/>
                 </StackPanel>
 
                 <!-- Основная рабочая область -->
@@ -87,7 +88,8 @@
                         <StackPanel Margin="10">
                             <TextBlock Text="Список выполняемых работ:" FontWeight="Bold" Foreground="White"/>
                             <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" FontSize="16"
-                                   ItemsSource="{Binding ActiveAndAcceptedOrders}" SelectedItem="{Binding SelectedOrder}">
+                                      VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                                      ItemsSource="{Binding ActiveAndAcceptedOrders}" SelectedItem="{Binding SelectedOrder}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Название работы" Binding="{Binding Servicesid.Наименование}"/>
                                     <DataGridTextColumn Header="Автомобиль">
@@ -126,10 +128,12 @@
                         <StackPanel Margin="10">
                             <TextBlock Text="История обращений клиентов:" FontWeight="Bold" Foreground="White"/>
                             <DataGrid Name="ClientHistoryGrid" AutoGenerateColumns="False" CanUserAddRows="False" FontSize="16"
-                                   ItemsSource="{Binding CompletedAndCanceledOrders}" SelectedItem="{Binding SelectedOrder, Mode=TwoWay}"
-                                   SelectionMode="Single">
+                                      VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                                      ItemsSource="{Binding CompletedAndCanceledOrders}" SelectedItem="{Binding SelectedOrder, Mode=TwoWay}"
+                                      SelectionMode="Single">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Дата обращения" Binding="{Binding Дата_Начала}"/>
+                                    <DataGridTextColumn Header="Дата окончания" Binding="{Binding Дата_Окончания}"/>
                                     <DataGridTextColumn Header="Автомобиль">
                                         <DataGridTextColumn.Binding>
                                             <MultiBinding StringFormat="{} {0} {1}">

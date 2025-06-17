@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RequestDataAccess.Entity;
 using System.Collections.ObjectModel;
+using Курсовая_на_Майкрософте.ViewModels.EmployeeViewModel.Окна_для_изменений;
 
 namespace Курсовая_на_Майкрософте.View.Employee
 {
@@ -26,8 +27,6 @@ namespace Курсовая_на_Майкрософте.View.Employee
         public CreateOrderWindow()
         {
             InitializeComponent();
-            DataContext = new CreateOrderViewModel();
-            //DataContext = new CreateOrderViewModel(new OrderRepository(new ApplicationContext()), new ApplicationContext());
         }
 
     }
