@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using RequestDataAccess.Repository;
 using RequestDataAccess.Repository.Abstraction;
 using Курсовая_на_Майкрософте.View.Employee;
+using Курсовая_на_Майкрософте.View.Client;
 
 namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewModel.Окна_для_изменений
 {
@@ -68,7 +69,9 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             _carServiseCentrRepository = new CarServiseCenterRepository(_context);
             _usersRepository = new UsersRepository(_context);
             _orderRepository = new OrderRepository(_context);
+
             SaveOrderCommand = new RelayCommand(SaveOrder, CanExecuteSaveOrder);
+
             LoadDataFromDatabase();
             LoadCarServiceCenters();
         }
@@ -405,6 +408,9 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             {
                 _orderRepository.Create(order);
                 _orderRepository.Save();
+
+                var mainVm = App.Current.MainWindow.DataContext as WindowEmployeeViewModel;
+                mainVm.LoadInitialData(null); // Перезагрузить начальные данные
 
                 _window.Close();
             }

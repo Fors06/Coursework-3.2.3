@@ -160,10 +160,13 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
         {
             try
             {
-                var load = new WindowEmployeeViewModel();
                 _orderRepository.Update(_editedOrder);
                 _orderRepository.Save();
-                load.LoadInitialData(null);
+
+                // Получаем ссылку на главный ViewModel и принудительно загружаем новые данные
+                var mainVm = App.Current.MainWindow.DataContext as WindowEmployeeViewModel;
+                mainVm.LoadInitialData(null); // Перезагрузить начальные данные
+
                 _window.Close();
             }
             catch (Exception ex)
