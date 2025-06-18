@@ -149,7 +149,14 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
         // Загрузка начальных данных
         public void LoadInitialData(object obj)
         {
-
+            Malfunctions.Clear();
+            CompletedAndCanceledOrders.Clear();
+            ActiveAndAcceptedOrders.Clear();
+            Services.Clear();
+            Cars.Clear();
+            Clients.Clear();
+            Employees.Clear();
+            ServiceCenters.Clear();
 
             // Загрузка свежих данных
             LoadOrders();
@@ -169,6 +176,7 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             {
                 Malfunctions.Add(malfunction);
             }
+            OnPropertyChanged(nameof(Malfunctions));
         }
 
         // Загрузка заказов
@@ -189,13 +197,14 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             {
                 CompletedAndCanceledOrders.Add(order);
             }
-
+            OnPropertyChanged(nameof(CompletedAndCanceledOrders));
             // Выполняемые и принятые заказы
             ActiveAndAcceptedOrders.Clear();
             foreach (var order in orders.Where(o => o.Orderstatusid.Статус_Заказа == "Выполняется" || o.Orderstatusid.Статус_Заказа == "Принят"))
             {
                 ActiveAndAcceptedOrders.Add(order);
             }
+            OnPropertyChanged(nameof(ActiveAndAcceptedOrders));
         }
 
         // Загрузка услуг
@@ -209,6 +218,7 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             {
                 Services.Add(service);
             }
+            OnPropertyChanged(nameof(Services));
         }
 
         // Загрузка автомобилей
@@ -223,6 +233,7 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             {
                 Cars.Add(car);
             }
+            OnPropertyChanged(nameof(Cars));
         }
 
         // Загрузка клиентов
@@ -234,6 +245,7 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             {
                 Clients.Add(client);
             }
+            OnPropertyChanged(nameof(Clients));
         }
 
         // Загрузка сотрудников
@@ -248,6 +260,7 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             {
                 Employees.Add(employee);
             }
+            OnPropertyChanged(nameof(Employees));
         }
 
         // Загрузка автосервисов
@@ -259,6 +272,7 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             {
                 ServiceCenters.Add(center);
             }
+            OnPropertyChanged(nameof(ServiceCenters));
         }
 
         public void OpenCreateOrderForm(object obj)

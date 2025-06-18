@@ -32,7 +32,7 @@
             <!-- ЛЕВЫЙ ДРАВЕР (ПОПУТНАЯ ПАНЕЛЬ) -->
             <extToolkit1:DrawerHost.LeftDrawerContent>
                 <StackPanel Margin="0,5,0,5" Width="212" Background="White">
-                    <Button Content="Вход" Height="30"
+                    <Button Content="Выход" Height="30"
                             Command="{Binding GoToEntranceCommand}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                             Style="{StaticResource MaterialDesignFlatButton}"/>

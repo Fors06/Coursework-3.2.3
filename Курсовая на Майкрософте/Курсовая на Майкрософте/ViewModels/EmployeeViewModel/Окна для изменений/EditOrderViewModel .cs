@@ -27,8 +27,8 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
         private readonly IRepository<Services> _servicesRepository;
         private readonly IRepository<Order_status> _statusRepository;
 
-        private Order_status selectedStatus;
-        private Services selectedService;
+        private Order_status _selectedStatus;
+        private Services _selectedService;
 
         public List<Order_status> AvailableStatuses { get; private set; }
         public List<Services> Services { get; private set; }
@@ -71,12 +71,12 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
        
         public Order_status SelectedStatus
         {
-            get => selectedStatus;
+            get => _selectedStatus;
             set
             {
-                if (selectedStatus != value)
+                if (_selectedStatus != value)
                 {
-                    selectedStatus = value;
+                    _selectedStatus = value;
                     _editedOrder.Statuses_id = value.Id; // Обновляем ID статуса
                     OnPropertyChanged(nameof(SelectedStatus));
                 }
@@ -85,12 +85,12 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
      
         public Services SelectedService
         {
-            get => selectedService;
+            get => _selectedService;
             set
             {
-                if (selectedService != value)
+                if (_selectedService != value)
                 {
-                    selectedService = value;
+                    _selectedService = value;
                     _editedOrder.Services_id = value.Id; // Обновляем ID услуги
                     Стоимость = value.Стоимость ?? 0; // Обновление стоимости заказа автоматически
                     OnPropertyChanged(nameof(SelectedService));
