@@ -160,12 +160,10 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
         {
             try
             {
-
-                Console.WriteLine("Заказ отправлен на обновление");
+                var load = new WindowEmployeeViewModel();
                 _orderRepository.Update(_editedOrder);
-                Console.WriteLine("Изменения отправлены в базу данных");
                 _orderRepository.Save();
-                Console.WriteLine("Данные сохранены");
+                load.LoadInitialData(null);
                 _window.Close();
             }
             catch (Exception ex)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using RequestDataAccess;
 using RequestDataAccess.Entity;
 using RequestDataAccess.Repository;
@@ -146,16 +147,9 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
         }
 
         // Загрузка начальных данных
-        private void LoadInitialData(object obj)
+        public void LoadInitialData(object obj)
         {
-            // Очистка существующих данных
-            ActiveAndAcceptedOrders.Clear();
-            CompletedAndCanceledOrders.Clear();
-            Services.Clear();
-            Cars.Clear();
-            Clients.Clear();
-            Employees.Clear();
-            ServiceCenters.Clear();
+
 
             // Загрузка свежих данных
             LoadOrders();
