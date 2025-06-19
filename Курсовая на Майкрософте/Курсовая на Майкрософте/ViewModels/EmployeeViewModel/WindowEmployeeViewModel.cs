@@ -1,21 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using RequestDataAccess;
 using RequestDataAccess.Entity;
 using RequestDataAccess.Repository;
 using RequestDataAccess.Repository.Abstraction;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Input;
-using Курсовая_на_Майкрософте.Data;
-using Курсовая_на_Майкрософте.View;
 using Курсовая_на_Майкрософте.View.Client;
 using Курсовая_на_Майкрософте.View.Employee;
 using Курсовая_на_Майкрософте.ViewModels.EmployeeViewModel.Окна_для_изменений;
@@ -58,6 +49,7 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
 
         // Коллекция сервисов
         public ObservableCollection<Car_service_center> ServiceCenters { get; set; } = new ObservableCollection<Car_service_center>();
+        // Коллекция неисправностей
         public ObservableCollection<Malfunction> Malfunctions { get; set; } = new ObservableCollection<Malfunction>();
 
 
@@ -146,33 +138,27 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             LoadInitialData(null);
         }
 
-        // Загрузка начальных данных
+
+
+        #region Загрузка таблиц
+
         public void LoadInitialData(object obj)
         {
-            Malfunctions.Clear();
-            CompletedAndCanceledOrders.Clear();
-            ActiveAndAcceptedOrders.Clear();
-            Services.Clear();
-            Cars.Clear();
-            Clients.Clear();
-            Employees.Clear();
-            ServiceCenters.Clear();
-
-            // Загрузка свежих данных
             LoadOrders();
             LoadServices();
             LoadCars();
             LoadClients();
             LoadEmployees();
+            LoadMalfunction();
             LoadServiceCenters();
         }
 
-        public void LoadMalfunction()
+        private void LoadMalfunction()
         {
             var malfunctions = _malfunctionRepository.GetStatusList().ToList();
 
             Malfunctions.Clear();
-            foreach(var malfunction in malfunctions)
+            foreach (var malfunction in malfunctions)
             {
                 Malfunctions.Add(malfunction);
             }
@@ -275,6 +261,8 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             OnPropertyChanged(nameof(ServiceCenters));
         }
 
+        #endregion
+
         public void OpenCreateOrderForm(object obj)
         {
             // Создаём экземпляр формы создания заказа
@@ -296,19 +284,18 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
                 return;
             }
 
-            var editWindow = new EditOrderWindow(SelectedOrder);
-            editWindow.DataContext = new EditOrderViewModel(SelectedOrder, editWindow); // Передаем только заказ
-            bool? result = editWindow.ShowDialog();
+            var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
 
-            if (result == true)
-            {
-                LoadInitialData(null);
-                MessageBox.Show("Данные успешно сохранены.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-               
-            }
+            var editWindow = new EditOrderWindow();
+            editWindow.DataContext = new EditOrderViewModel(SelectedOrder); // Передаем только заказ
+            Application.Current.MainWindow = editWindow;
+
+
+            editWindow.Show();
+
+            currentWindow.Close();
+
+          
         }
 
 

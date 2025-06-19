@@ -11,12 +11,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Курсовая_на_Майкрософте.View.Client;
 
 namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewModel.Окна_для_изменений
 {
     public class EditOrderViewModel : INotifyPropertyChanged
     {
-        private readonly Window _window;
 
         ApplicationContext _context;
 
@@ -37,9 +37,8 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
         public ICommand CancelCommand => new RelayCommand(Cancel);
 
 
-        public EditOrderViewModel(Order originalOrder, Window window)
+        public EditOrderViewModel(Order originalOrder)
         {
-            _window = window;
 
             _context = new ApplicationContext();
             _orderRepository = new OrderRepository(_context);
@@ -163,16 +162,30 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
                 _orderRepository.Update(_editedOrder);
                 _orderRepository.Save();
 
-                // Получаем ссылку на главный ViewModel и принудительно загружаем новые данные
-                var mainVm = App.Current.MainWindow.DataContext as WindowEmployeeViewModel;
-                mainVm.LoadInitialData(null); // Перезагрузить начальные данные
+                //// Получаем ссылку на главный ViewModel и принудительно загружаем новые данные
+                //var mainVm = App.Current.MainWindow.DataContext as WindowEmployeeViewModel;
+                //mainVm.LoadInitialData(null); // Перезагрузить начальные данные
 
-                _window.Close();
+                MessageBox.Show("Данные успешно сохранены.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+
+
+                var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
+
+                WindowEmployee winemp = new WindowEmployee();
+                Application.Current.MainWindow = winemp;
+                winemp.Show();
+                currentWindow.Close();
             }
             catch (Exception ex)
             {
-                _window.Close();
-                Console.WriteLine($"Ошибка обновления записи: {ex.Message}");
+                var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
+
+                WindowEmployee winemp = new WindowEmployee();
+                Application.Current.MainWindow = winemp;
+                winemp.Show();
+                currentWindow.Close();
+
+                MessageBox.Show($"Ошибка обновления записи: {ex.Message}");
             }
         }
 
@@ -192,7 +205,13 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
                 Statuses_id = _originalOrder.Statuses_id,
                 Services_id = _originalOrder.Services_id
             };
-            _window.Close();
+
+            var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
+
+            WindowEmployee winemp = new WindowEmployee();
+            Application.Current.MainWindow = winemp;
+            winemp.Show();
+            currentWindow.Close();
         }
 
         #endregion

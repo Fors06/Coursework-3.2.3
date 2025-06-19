@@ -69,7 +69,8 @@
                              DisplayMemberPath="Description" Width="200" FontSize="16"
                              Foreground="White" BorderBrush="White"/>
                     <Button Content="Новый заказ" Command="{Binding OpenCreateOrderFormCommand}" Margin="10,0,0,0" Style="{StaticResource ButtonStyle}"/>
-                    <Button Content="Редактировать" Command="{Binding OpenEditOrderFormCommand}" Margin="10,0,0,0" Style="{StaticResource ButtonStyle}"/>
+                    <Button Content="Редактировать" Command="{Binding OpenEditOrderFormCommand}" Margin="10,0,0,0" Style="{StaticResource ButtonStyle}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
                     <Button Content="Обновить" Command="{Binding UpdateCommand}" Margin="10,0,0,0" Style="{StaticResource ButtonStyle}"/>
                 </StackPanel>
 

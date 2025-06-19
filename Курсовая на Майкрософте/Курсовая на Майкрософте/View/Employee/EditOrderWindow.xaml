@@ -85,9 +85,11 @@
         <!-- Кнопки -->
         <StackPanel Grid.Row="7" Grid.Column="2" Orientation="Horizontal" Margin="10,5,10,5">
             <Button Content="Сохранить" Command="{Binding SaveOrderCommand}" Margin="5"
-                    Style="{StaticResource ButtonStyle}"/>
+                    Style="{StaticResource ButtonStyle}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
             <Button Content="Отмена" Command="{Binding CancelCommand}" Margin="5"
-                    Style="{StaticResource ButtonStyle}"/>
+                    Style="{StaticResource ButtonStyle}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
         </StackPanel>
     </Grid>
 </Window>

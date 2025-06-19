@@ -416,7 +416,7 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка сохранения записи: {ex}");
+                MessageBox.Show($"Ошибка сохранения записи: {ex}"); 
             }
         }
 

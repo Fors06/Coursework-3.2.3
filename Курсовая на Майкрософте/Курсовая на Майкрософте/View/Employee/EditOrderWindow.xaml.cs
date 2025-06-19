@@ -24,7 +24,7 @@ namespace Курсовая_на_Майкрософте.View.Employee
     public partial class EditOrderWindow : Window
     {
 
-        public EditOrderWindow(Order order)
+        public EditOrderWindow()
         {
             InitializeComponent();
         }
