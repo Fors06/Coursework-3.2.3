@@ -2,11 +2,8 @@
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
-using Курсовая_на_Майкрософте;
 using Курсовая_на_Майкрософте.Data;
 using Курсовая_на_Майкрософте.Data.SwitchTheme;
-using Курсовая_на_Майкрософте.Forms.Admin.The_common_window;
-using Курсовая_на_Майкрософте.Properties;
 
 namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdminViewModels
 {

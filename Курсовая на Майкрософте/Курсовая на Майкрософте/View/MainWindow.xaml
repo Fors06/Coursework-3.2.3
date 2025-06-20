@@ -80,29 +80,37 @@
                 <RowDefinition Height="26*"/>
             </Grid.RowDefinitions>
 
-            <Label Content="Авторизация" VerticalAlignment="Center" Foreground="#FFF7F5F5" FontSize="20" Panel.ZIndex="1" Height="43" HorizontalAlignment="Center" Width="130" Grid.Column="1"/>
+            <Label Content="Авторизация" VerticalAlignment="Top" Foreground="#FFF7F5F5" FontSize="20" Panel.ZIndex="1" Height="43" HorizontalAlignment="Center" Width="130" Grid.Column="1" Margin="0,18,0,0"/>
 
-            <TextBox Text="{Binding Username}" Margin="32,0,32,0"
+            <TextBox Text="{Binding Username}" Margin="32,9,32,0"
                      materialDesign:HintAssist.Hint="Логин" Style="{StaticResource MaterialDesignFilledTextBox}"
                      Foreground="White" Background="{x:Null}" BorderBrush="White"
                      Panel.ZIndex="1" Grid.Row="1" Grid.Column="1" Height="35" 
                      Grid.IsSharedSizeScope="True" UseLayoutRounding="False" Padding="0,0,0,1"
-                     FontSize="16" CaretBrush="White" VerticalAlignment="Center"/>
+                     FontSize="16" CaretBrush="White" VerticalAlignment="Top"/>
 
-            <PasswordBox x:Name="passwordBox" Margin="32,0,32,0" 
+            <PasswordBox x:Name="passwordBox" Margin="32,10,32,0" 
                          Panel.ZIndex="1" materialDesign:HintAssist.Hint="Пароль" Style="{StaticResource MaterialDesignFilledPasswordBox}"
                          Foreground="White"  BorderBrush="White" Background="{x:Null}" 
-                         Grid.Column="1" Height="35" VerticalAlignment="Center" Grid.Row="2"
+                         Grid.Column="1" Height="35" VerticalAlignment="Top" Grid.Row="2"
                          PasswordChanged="passwordBox_PasswordChanged" Padding="0,0,0,1"
                          FontSize="16" CaretBrush="White" />
 
 
             <Button Command="{Binding LoginCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                    Content="Вход" HorizontalAlignment="Center" VerticalAlignment="Center" Width="130" Height="27"
+                    Content="Вход" VerticalAlignment="Center" Height="27"
                     Foreground="White" BorderBrush="White" Background="{x:Null}"
                     Style="{StaticResource MaterialDesignFlatDarkBgButton}"
-                    Panel.ZIndex="1" Grid.Row="3" Grid.Column="1" />
+                    Panel.ZIndex="1" Grid.Row="3" Grid.Column="1" Margin="126,0,126,0" />
+
+            <Button Content="Вернуться"
+                    Command="{Binding GoToEntranceCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                    VerticalAlignment="Stretch"
+                    Foreground="White" BorderBrush="White" Background="{x:Null}"
+                    Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                    Grid.Row="3" Grid.Column="2"/>
         </Grid>
         <TextBox  HorizontalAlignment="Left" Margin="16,121,0,0" TextWrapping="Wrap" Text="solo@company.ru" VerticalAlignment="Top" Width="177" />
         <TextBox  HorizontalAlignment="Left" Margin="16,166,0,0" TextWrapping="Wrap" Text="solovyov123" VerticalAlignment="Top" Width="177"/>

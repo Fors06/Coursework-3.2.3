@@ -263,6 +263,7 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
 
         #endregion
 
+
         public void OpenCreateOrderForm(object obj)
         {
             // Создаём экземпляр формы создания заказа
@@ -309,10 +310,8 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             // Назначаем новое окно главным окном приложения
             Application.Current.MainWindow = employeeWindow;
 
-            // Показываем новое окно
             employeeWindow.Show();
 
-            // Закрываем текущее окно (LoginWindow)
             currentWindow.Close();
            
         }

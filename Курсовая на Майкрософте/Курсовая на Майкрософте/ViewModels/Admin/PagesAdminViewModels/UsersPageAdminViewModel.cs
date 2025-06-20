@@ -7,14 +7,8 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using RequestDataAccess;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 using System.Windows.Controls;
-using Windows.Foundation.Metadata;
-using Windows.Networking;
-using Windows.System;
-using System.Text.RegularExpressions;
 using System.Windows;
-using System.Net;
 
 namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdminViewModels
 {
@@ -317,9 +311,6 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
 
 
 
-
-
-
             #region Поиск
 
             private IEnumerable<Car_service_center> carServiceCenters;
@@ -481,6 +472,8 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
 
             #region Общие кнопки
 
+            #region Очищение полей
+
             public void ClearFields(object obj)
             {
                 if (ActiveTab is TabItem employeeTab && employeeTab.Header.Equals("Сотрудники") && SelectedEmployee != null)
@@ -505,6 +498,10 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
                     ClientEmail = String.Empty;
                 }
             }
+
+            #endregion 
+
+            #region Удаление
 
             public void Delete(object obj)
             {
@@ -531,6 +528,9 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
                 }
             }
 
+            #endregion
+
+            #region Редактирование
 
             public void Edit(object obj)
             {
@@ -603,6 +603,9 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
                
             }
 
+            #endregion
+
+            #region Добавление клиента и сотрудника
             public void CreateEmployeesAndClients(object obj)
             {
                 // Добавление клиента
@@ -704,6 +707,8 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
                
             }
 
+            #endregion
+
             private Car_service_center FindServiceCenterByAddress(ApplicationContext context, string address)
             {
                 var normalizedAddress = NormalizeString(address);
@@ -724,13 +729,13 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
 
 
 
-            // Новое свойство для блокировки уведомлений
-            private bool raisePropertyChangedEvents = true;
-            public bool RaisePropertyChangedEvents
-            {
-                get => raisePropertyChangedEvents;
-                set => raisePropertyChangedEvents = value;
-            }
+            //// Новое свойство для блокировки уведомлений
+            //private bool raisePropertyChangedEvents = true;
+            //public bool RaisePropertyChangedEvents
+            //{
+            //    get => raisePropertyChangedEvents;
+            //    set => raisePropertyChangedEvents = value;
+            //}
         }
     }
 }

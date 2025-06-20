@@ -1,18 +1,12 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using RequestDataAccess;
 using RequestDataAccess.Entity;
 using RequestDataAccess.User;
-using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using Курсовая_на_Майкрософте.Forms.Admin.The_common_window;
-using Курсовая_на_Майкрософте.Forms.Admin.The_common_window.Pages;
-using Курсовая_на_Майкрософте.View;
 using Курсовая_на_Майкрософте.View.Client;
-using Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdminViewModels;
-using Курсовая_на_Майкрософте.Data; // Добавьте пространство имен для диспетчера окон
 
 namespace Курсовая_на_Майкрософте.ViewModels
 {
@@ -51,11 +45,13 @@ namespace Курсовая_на_Майкрософте.ViewModels
 
         public ICommand LoginCommand { get; }
         public ICommand EnterKeyCommand { get; }
+        public ICommand GoToEntranceCommand { get; }
 
         public LoginViewModel()
         {
             LoginCommand = new RelayCommand(LoginExecute);
             EnterKeyCommand = new RelayCommand(LoginExecute);
+            GoToEntranceCommand = new RelayCommand(GoToEntrance);
         }
 
         public static int LoggedInUserId { get; set; } // Публичное свойство для сохранения идентификатора
@@ -90,8 +86,6 @@ namespace Курсовая_на_Майкрософте.ViewModels
                             Role = user.User_Typeid.Роль
                         };
 
-                        //// Используем диспетчер окон для открытия нового окна
-                        //WindowManager.SwitchWindow(new The_common_window()); // Перейти к окну админа
 
 
                         var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
@@ -102,31 +96,24 @@ namespace Курсовая_на_Майкрософте.ViewModels
                         // Назначаем новое окно главным окном приложения
                         Application.Current.MainWindow = employeeWindow;
 
-                        // Показываем новое окно
                         employeeWindow.Show();
 
-                        // Закрываем текущее окно (LoginWindow)
                         currentWindow.Close();
 
                     }
                     else if (user.User_Typeid.Роль == "Сотрудник")
                     {
-                        //// Используем диспетчер окон для открытия нового окна
-                        //WindowManager.SwitchWindow(new WindowEmployee()); // Перейти к окну сотрудника
 
-                        // Получить текущее окно (предполагаем, что LoginWindow — текущее окно)
+                        // Получить текущее окно 
                         var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
 
-                        // Создаем новое окно Employee
                         WindowEmployee employeeWindow = new WindowEmployee();
 
                         // Назначаем новое окно главным окном приложения
                         Application.Current.MainWindow = employeeWindow;
 
-                        // Показываем новое окно
                         employeeWindow.Show();
 
-                        // Закрываем текущее окно (LoginWindow)
                         currentWindow.Close();
                     }
                     else
@@ -139,6 +126,19 @@ namespace Курсовая_на_Майкрософте.ViewModels
                     MessageBox.Show("Неверные данные для входа.", "Ошибка авторизации", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
+        }
+
+        private void GoToEntrance(object obj)
+        {
+            var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
+
+            ClientWindow clientWindow = new ClientWindow();
+
+            Application.Current.MainWindow = clientWindow;
+
+            clientWindow.Show();
+
+            currentWindow.Close();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

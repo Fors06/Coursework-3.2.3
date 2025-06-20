@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RequestDataAccess.Entity;
 using RequestDataAccess.Repository.Abstraction;
-using System.Linq;
 
 namespace RequestDataAccess.Repository
 {

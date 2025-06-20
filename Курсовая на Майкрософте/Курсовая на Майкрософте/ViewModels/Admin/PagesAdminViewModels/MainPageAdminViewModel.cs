@@ -11,9 +11,7 @@ using OxyPlot.Series;
 using System.Windows.Input;
 using OxyPlot.Axes;
 using System.Diagnostics;
-using Microsoft.Extensions.Options;
 using RequestDataAccess.Repository.Abstraction;
-using Windows.UI;
 
 namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdminViewModels
 {

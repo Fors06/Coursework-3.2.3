@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Курсовая_на_Майкрософте.Data;
 using Курсовая_на_Майкрософте.View;
-using Курсовая_на_Майкрософте.View.Client;
 using Курсовая_на_Майкрософте.View.Client.Pages;
 
 namespace Курсовая_на_Майкрософте.ViewModels.ClientViewModel
@@ -38,14 +31,6 @@ namespace Курсовая_на_Майкрософте.ViewModels.ClientViewMode
 
         private void GoToEntrance(object obj)
         {
-            // Создаем новое окно
-            //WindowManager.SwitchWindow(new MainWindow());
-
-            //MainWindow mainWindow = new MainWindow();
-            //Application.Current.MainWindow = mainWindow;
-            //mainWindow.Show();
-            //ClientWindow clientWindow = new ClientWindow();
-            //clientWindow.Close();
 
 
             var currentWindow = App.Current.MainWindow as Window ?? Window.GetWindow(obj as DependencyObject);
@@ -56,10 +41,8 @@ namespace Курсовая_на_Майкрософте.ViewModels.ClientViewMode
             // Назначаем новое окно главным окном приложения
             Application.Current.MainWindow = employeeWindow;
 
-            // Показываем новое окно
             employeeWindow.Show();
 
-            // Закрываем текущее окно (LoginWindow)
             currentWindow.Close();
         }
 

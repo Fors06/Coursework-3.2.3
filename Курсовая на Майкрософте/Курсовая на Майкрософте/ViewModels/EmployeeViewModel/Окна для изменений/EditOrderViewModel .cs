@@ -2,13 +2,8 @@
 using RequestDataAccess.Entity;
 using RequestDataAccess.Repository;
 using RequestDataAccess.Repository.Abstraction;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Курсовая_на_Майкрософте.View.Client;
@@ -162,9 +157,6 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
                 _orderRepository.Update(_editedOrder);
                 _orderRepository.Save();
 
-                //// Получаем ссылку на главный ViewModel и принудительно загружаем новые данные
-                //var mainVm = App.Current.MainWindow.DataContext as WindowEmployeeViewModel;
-                //mainVm.LoadInitialData(null); // Перезагрузить начальные данные
 
                 MessageBox.Show("Данные успешно сохранены.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
 

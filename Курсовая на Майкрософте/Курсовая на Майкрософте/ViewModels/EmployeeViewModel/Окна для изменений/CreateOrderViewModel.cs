@@ -1,18 +1,12 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using System.Collections.Generic;
-using System.Linq;
 using RequestDataAccess.Entity;
-using System;
-using Курсовая_на_Майкрософте;
 using RequestDataAccess;
 using System.Windows;
 using System.Collections.ObjectModel;
 using RequestDataAccess.Repository;
 using RequestDataAccess.Repository.Abstraction;
-using Курсовая_на_Майкрософте.View.Employee;
-using Курсовая_на_Майкрософте.View.Client;
 
 namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewModel.Окна_для_изменений
 {
@@ -380,6 +374,7 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
 
         #endregion
 
+        #region Сохранение заказа
         // Сохранение заказа
         private void SaveOrder(object obj)
         {
@@ -419,6 +414,8 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
                 MessageBox.Show($"Ошибка сохранения записи: {ex}"); 
             }
         }
+
+        #endregion
 
         #region Валидация
         // Валидация формы

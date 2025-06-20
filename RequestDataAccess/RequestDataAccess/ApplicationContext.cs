@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using RequestDataAccess.Entity;
 
 namespace RequestDataAccess
@@ -24,19 +23,6 @@ namespace RequestDataAccess
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=Автомастерская_2;Trusted_Connection=True;");
         }
-
-        //protected override void OnModelCreating(ModelBuilder builder)
-        //{
-        //    builder.Entity<Users>()
-        //        .HasMany(c => c.Employees)
-        //        .WithOne(e => e.Users)
-        //        .HasForeignKey(e => e.Users_id);
-
-        //    builder.Entity<Users>()
-        //        .HasMany(c => c.Clients)
-        //        .WithOne(e => e.Users)
-        //        .HasForeignKey(e => e.Users_id);
-        //}
     }
 
 

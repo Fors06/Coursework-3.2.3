@@ -4,17 +4,11 @@ using RequestDataAccess;
 using RequestDataAccess.Entity;
 using RequestDataAccess.Repository;
 using RequestDataAccess.Repository.Abstraction;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdminViewModels
@@ -272,6 +266,22 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
         {
             if (SelectedServise != null)
             {
+                // Получаем значение пути к файлу изображения из привязанного свойства PhotoPath
+                string newPhotoPath = PhotoPath;
+
+                // Проверяем, есть ли указанный путь к новому изображению
+                if (!string.IsNullOrEmpty(newPhotoPath))
+                {
+                    // Если да, то заменяем старое изображение новым
+                    using (var fs = new FileStream(newPhotoPath, FileMode.Open, FileAccess.Read))
+                    {
+                        byte[] photoData = new byte[fs.Length];
+                        fs.Read(photoData, 0, photoData.Length);
+                        SelectedServise.Фотография = photoData;
+                    }
+                }
+
+
                 SelectedServise.Наименование = Название;
                 SelectedServise.Описание = Описание;
                 SelectedServise.Стоимость = Стоимость;
