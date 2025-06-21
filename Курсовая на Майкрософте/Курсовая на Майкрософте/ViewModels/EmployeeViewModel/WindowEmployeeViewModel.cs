@@ -309,7 +309,6 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
 
             // Назначаем новое окно главным окном приложения
             Application.Current.MainWindow = employeeWindow;
-
             employeeWindow.Show();
 
             currentWindow.Close();

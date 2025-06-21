@@ -81,6 +81,8 @@ namespace Курсовая_на_Майкрософте.ViewModels.EmployeeViewMo
             _carCenters = context.car_Service_Centers.ToList();
             _services = context.serviceses.ToList();
 
+            StartDate = DateTime.Today;
+
             AvailableBrands = new ObservableCollection<string>(_cars.Select(car => car.Марка).Distinct().ToList());
             AvailableModels = new ObservableCollection<string>(_cars.Select(car => car.Модель).Distinct().ToList());
         }

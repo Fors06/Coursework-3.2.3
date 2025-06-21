@@ -65,7 +65,7 @@ CREATE TABLE Услуги (
     Наименование VARCHAR(100) NOT NULL,
     Описание TEXT NOT NULL,
     Стоимость DECIMAL(10, 2) NOT NULL,
-	Фотография VARBINARY(MAX),
+	Фотография VARBINARY(MAX) NOT NULL,
     Auto_Service_id INT NOT NULL,
     FOREIGN KEY (Auto_Service_id) REFERENCES Автосервисная(Id)
 );
@@ -94,13 +94,16 @@ CREATE TABLE [Статус заказа] (
 --Заказ
 CREATE TABLE Заказ (
     Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    Дата_начала DATETime NOT NULL,
+	Дата_окончания DateTime NOT NULL,
+    Стоимость DECIMAL(10, 2) NOT NULL,
     Cars_id int NOT NULL,
     Clients_id INT,
     Master_id INT NOT NULL,
     Auto_Service_id INT NOT NULL,
     Statuses_id INT NOT NULL,
     Services_id INT NOT NULL,
-    FOREIGN KEY (Cars_id) REFERENCES Автомобиль(Id),
+    FOREIGN KEY (Cars_id) REFERENCES Автомобиль(Id), --ON DELETE CASCADE,
     FOREIGN KEY (Clients_id) REFERENCES Клиент(Id),
     FOREIGN KEY (Master_id) REFERENCES Сотрудник(Id),
     FOREIGN KEY (Auto_Service_id) REFERENCES Автосервисная(Id),

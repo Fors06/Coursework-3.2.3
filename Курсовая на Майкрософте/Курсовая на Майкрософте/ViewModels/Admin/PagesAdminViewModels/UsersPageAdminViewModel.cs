@@ -698,13 +698,15 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
                     _employeeRepository.Save();
 
                     LoadEmployees();
-                    ClearFields(null);
+                    
                 }
                 else
                 {
                     MessageBox.Show("Заполните все поля.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-               
+
+                ClearFields(null);
+
             }
 
             #endregion

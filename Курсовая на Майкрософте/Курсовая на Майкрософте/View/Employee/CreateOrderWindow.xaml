@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Курсовая_на_Майкрософте.View.Employee"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:local2="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+        xmlns:local2="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf" xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Icon="/View/vecteezy_car-services-automotive-logo-design-template_12188355.jpg"
         Title="Добавление заказа" Height="450" Width="800">
@@ -74,11 +74,16 @@
                  Margin="11,5,11,0" Height="63" VerticalAlignment="Top"
                  Text="{Binding ClientMiddleName, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"/>
 
-        <TextBox Grid.Column="6" FontSize="16"
-                 Style="{StaticResource MaterialDesignTextBox}"
-                 materialDesign:HintAssist.Hint="Телефон"
-                 BorderBrush="White" Foreground="White" Margin="13,0,39,0"
-                 Text="{Binding Телефон, UpdateSourceTrigger=PropertyChanged}" Height="68" VerticalAlignment="Top"/>
+        <extToolkit:MaskedTextBox
+            FontSize="16" 
+            Mask="+7 (000) 000-00-00" Foreground="White" BorderBrush="White"
+            PromptChar="_" Style="{StaticResource MaterialDesignTextBox}"
+            Text="{Binding EmployeePhoneNumber, Mode=TwoWay}"
+            Margin="5,28,5,0"
+            Height="40"
+            VerticalAlignment="Top"
+            Grid.Row="0"
+            Grid.Column="6"/>
 
         <Label Content="Мастер:" Grid.Column="0" Foreground="White" FontSize="16" Margin="5,10,5,0" Grid.Row="1" Height="32" VerticalAlignment="Top"/>
         <ComboBox Grid.Row="1" Grid.Column="1" Margin="5,5,10,0" FontSize="16" VerticalAlignment="Top"

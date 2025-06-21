@@ -318,7 +318,8 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
                 if (string.IsNullOrEmpty(Название) ||
                string.IsNullOrEmpty(Описание) ||
                Стоимость <= 0 ||
-               string.IsNullOrEmpty(Adress))
+               string.IsNullOrEmpty(Adress) ||
+               string.IsNullOrEmpty(PhotoPath))
                 {
                     MessageBox.Show("Заполните все поля.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
