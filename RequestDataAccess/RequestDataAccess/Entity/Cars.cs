@@ -24,5 +24,6 @@ namespace RequestDataAccess.Entity
 
         [ForeignKey("Client_id")]
         public Client Clientid { get; set; }
+
     }
 }

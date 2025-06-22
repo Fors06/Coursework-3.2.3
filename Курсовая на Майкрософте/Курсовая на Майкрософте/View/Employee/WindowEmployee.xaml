@@ -8,7 +8,7 @@
         xmlns:extToolkit1="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="Управление заказами" Height="450" Width="800"
-        Icon="/View/vecteezy_car-services-automotive-logo-design-template_12188355.jpg">
+        Icon="/View/vecteezy_car-services-automotive-logo-design-template_12188355.jpg" WindowState="Maximized">
 
     <Window.Resources>
         <ResourceDictionary>

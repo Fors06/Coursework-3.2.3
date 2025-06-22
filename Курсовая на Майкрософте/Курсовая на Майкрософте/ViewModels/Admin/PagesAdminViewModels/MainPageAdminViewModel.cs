@@ -136,7 +136,6 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
 
         public ICommand RefreshGraphCommand { get; }
 
-
         private PlotModel _plotModel;
         private List<Order> _cachedOrders;
         private Dictionary<string, Func<IEnumerable<Order>>> _rangeFilters;
@@ -158,13 +157,23 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
 
         private async Task RefreshGraph()
         {
-
             try
             {
                 await LoadCachedOrders();
                 var filteredOrders = _rangeFilters[SelectedRange].Invoke().ToArray();
-                PlotModel = CreatePlotModel(filteredOrders);
-                PlotModel.InvalidatePlot(true); // Принуждаем к перерисовке
+
+                // Проверяем, есть ли заказы
+                if (filteredOrders.Any())
+                {
+                    PlotModel = CreatePlotModel(filteredOrders);
+                    PlotModel.InvalidatePlot(true); // Принуждаем к перерисовке
+                }
+                else
+                {
+                    // Если заказов нет, очищаем график
+                    PlotModel.Series.Clear();
+                    PlotModel.InvalidatePlot(true);
+                }
             }
             catch (Exception ex)
             {
@@ -174,11 +183,14 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
 
         private async Task LoadCachedOrders()
         {
-
             using (var db = new ApplicationContext())
             {
-                _cachedOrders = await db.orders.OrderBy(o => o.Дата_Начала).ToListAsync(); // Сортируем по дате
-                //Debug.WriteLine($"Loaded {_cachedOrders.Count()} orders.");
+                // Фильтруем только готовые заказы (статус Id = 4)
+                _cachedOrders = await db.orders
+                    .Where(o => o.Statuses_id == (int)OrderStatus.Готов) // Фильтрация по статусу "Готов"
+                    .OrderBy(o => o.Дата_Начала)
+                    .ToListAsync(); // Сортируем по дате
+                                    //Debug.WriteLine($"Loaded {_cachedOrders.Count()} orders.");
             }
         }
 
@@ -217,7 +229,6 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
                 AbsoluteMaximum = double.NaN,              // Автоопределение максимума
                 IsZoomEnabled = true,                     // Масштабируемость по оси Y
                 IsPanEnabled = true,                        // Перемещаемость по оси Y
-                
             };
             PlotModel.Axes.Add(linearAxis);
 
@@ -251,35 +262,6 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
 
             PlotModel.Series.Add(lineSeries);
             return PlotModel;
-
-            // PlotModel = new PlotModel { Title = "Изменение стоимости заказов" };
-
-            //// Формируем новый график
-            //if (PlotModel.Series.Any()) PlotModel.Series.Clear();
-
-            //// Создаем серию для отображения данных
-            //var lineSeries = new LineSeries { Title = "Стоимость заказов" };
-            //foreach (var order in filteredOrders.OrderBy(o => o.Дата))
-            //{
-            //    lineSeries.Points.Add(new DataPoint(
-            //        DateTimeAxis.ToDouble(order.Дата),   // Время
-            //        (double)order.Стоимость));           // Цена
-            //}
-            //PlotModel.Series.Add(lineSeries);
-
-            //// Найдем минимальное и максимальное значение дат среди полученных заказов
-            //var minDate = filteredOrders.Min(o => o.Дата);
-            //var maxDate = filteredOrders.Max(o => o.Дата);
-
-            //// Установим пределы оси времени (X)
-            //var xAxis = (DateTimeAxis)PlotModel.Axes.FirstOrDefault(a => a.Position == AxisPosition.Bottom);
-            //if (xAxis != null)
-            //{
-            //    xAxis.AbsoluteMinimum = DateTimeAxis.ToDouble(minDate);
-            //    xAxis.AbsoluteMaximum = DateTimeAxis.ToDouble(maxDate);
-            //}
-
-            //return PlotModel;
         }
 
         #endregion
@@ -299,10 +281,6 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
 
         private IEnumerable<Order> FilterByMonth()
         {
-            //var monthStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            //var nextMonthStart = monthStart.AddMonths(1);
-            //return _cachedOrders.Where(o => o.Дата >= monthStart && o.Дата < nextMonthStart).ToList();
-
             var firstDayOfMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddSeconds(-1); // Последний день месяца
 

@@ -1,4 +1,6 @@
-﻿namespace RequestDataAccess.Repository.Abstraction
+﻿using RequestDataAccess.Entity;
+
+namespace RequestDataAccess.Repository.Abstraction
 {
     public interface IRepository<T> : IDisposable
           where T : class

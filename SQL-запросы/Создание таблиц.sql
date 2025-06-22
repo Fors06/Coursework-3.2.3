@@ -1,20 +1,20 @@
 USE [Автомастерская_2];
 
---Тип_Пользователя
+-- Тип пользователя
 CREATE TABLE [Тип Пользователя] (
     Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
     Роль VARCHAR(100) NOT NULL UNIQUE
 );
 
---Пользователи
+-- Пользователи
 CREATE TABLE Пользователь (
     Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
     Имя VARCHAR(100) NOT NULL,
     Фамилия VARCHAR(50) NOT NULL,
-	Отчество VARCHAR(50),
+    Отчество VARCHAR(50),
     Email VARCHAR(100),
     Пароль VARCHAR(255) NOT NULL,
-    Телефон VARCHAR(20) NOT NULL,
+    Телефон VARCHAR(20),
     User_Type_id INT NOT NULL,
     FOREIGN KEY (User_Type_id) REFERENCES [Тип Пользователя](Id)
 );
@@ -27,7 +27,7 @@ CREATE TABLE Клиент (
     Отчество VARCHAR(50),
     Телефон VARCHAR(20),
     Users_id INT NOT NULL,
-    FOREIGN KEY (Users_id) REFERENCES Пользователь(Id),
+    FOREIGN KEY (Users_id) REFERENCES Пользователь(Id) 
 );
 
 -- Автопредприятие
@@ -38,13 +38,13 @@ CREATE TABLE Автосервисная (
     Телефон VARCHAR(20),
     Рейтинг DECIMAL(3, 1) CHECK (Рейтинг >= 0 AND Рейтинг <= 5),
     [Начало работы] TIME NOT NULL,
-	[Конец работы] TIME NOT NULL
+    [Конец работы] TIME NOT NULL
 );
 
 -- Неисправность
 CREATE TABLE Неисправность (
     Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-    Описание TEXT,
+    Описание TEXT
 );
 
 -- Автомобили
@@ -53,10 +53,10 @@ CREATE TABLE Автомобиль (
     Марка VARCHAR(50) NOT NULL,
     Модель VARCHAR(50) NOT NULL,
     [Год выпуска] INT NOT NULL,
-    Client_id INT NOT NULL,
-	Malfunction_id int NOT NULL,
-    FOREIGN KEY (Client_id) REFERENCES Клиент(Id),
-	FOREIGN KEY (Malfunction_id) REFERENCES Неисправность(Id)
+    Client_id INT,
+    Malfunction_id INT NOT NULL,
+    FOREIGN KEY (Client_id) REFERENCES Клиент(Id), -- Без каскадного удаления
+    FOREIGN KEY (Malfunction_id) REFERENCES Неисправность(Id)
 );
 
 -- Услуги
@@ -65,7 +65,7 @@ CREATE TABLE Услуги (
     Наименование VARCHAR(100) NOT NULL,
     Описание TEXT NOT NULL,
     Стоимость DECIMAL(10, 2) NOT NULL,
-	Фотография VARBINARY(MAX) NOT NULL,
+    Фотография VARBINARY(MAX) NOT NULL,
     Auto_Service_id INT NOT NULL,
     FOREIGN KEY (Auto_Service_id) REFERENCES Автосервисная(Id)
 );
@@ -91,23 +91,22 @@ CREATE TABLE [Статус заказа] (
     Статус VARCHAR(20) NOT NULL
 );
 
---Заказ
+-- Заказ
 CREATE TABLE Заказ (
     Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-    Дата_начала DATETime NOT NULL,
-	Дата_окончания DateTime NOT NULL,
+    Дата_начала DATETIME NOT NULL,
+    Дата_окончания DATETIME NOT NULL,
     Стоимость DECIMAL(10, 2) NOT NULL,
-    Cars_id int NOT NULL,
+    Cars_id INT,
     Clients_id INT,
     Master_id INT NOT NULL,
     Auto_Service_id INT NOT NULL,
     Statuses_id INT NOT NULL,
     Services_id INT NOT NULL,
-    FOREIGN KEY (Cars_id) REFERENCES Автомобиль(Id), --ON DELETE CASCADE,
-    FOREIGN KEY (Clients_id) REFERENCES Клиент(Id),
+    FOREIGN KEY (Cars_id) REFERENCES Автомобиль(Id),
+    FOREIGN KEY (Clients_id) REFERENCES Клиент(Id), -- Без каскадного удаления
     FOREIGN KEY (Master_id) REFERENCES Сотрудник(Id),
     FOREIGN KEY (Auto_Service_id) REFERENCES Автосервисная(Id),
     FOREIGN KEY (Statuses_id) REFERENCES [Статус заказа](Id),
     FOREIGN KEY (Services_id) REFERENCES Услуги(Id)
 );
-

@@ -9,11 +9,15 @@
       Title="PageServices">
 
     <Grid Background="White">
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding Servises}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-
                         <StackPanel Margin="10">
                             <Border Margin="10" Padding="10" Background="#EFEFEF" CornerRadius="5">
                                 <StackPanel>
@@ -21,11 +25,9 @@
                                     <TextBlock Text="{Binding Наименование}" FontSize="18" FontWeight="Medium" Margin="0,0,0,5"/>
                                     <TextBlock Text="{Binding Описание}" FontSize="14" TextWrapping="Wrap" Margin="0,0,0,10"/>
                                     <TextBlock Text="{Binding Стоимость, StringFormat='от {0} руб. '}" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"/>
-                                    <!--<Button Content="Заполнить анкету" Style="{StaticResource ButtonStyle}" Command="{Binding RequestTireServiceCommand}" Margin="0,10,0,0"/>-->
                                 </StackPanel>
                             </Border>
                         </StackPanel>
-                        
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

@@ -512,8 +512,18 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
                 {
                     if (ActiveTab is TabItem clientTab && clientTab.Header.Equals("Клиенты") && SelectedClient != null)
                     {
-                        _context.Database.ExecuteSqlRaw("EXEC DeleteClient @p0", new object[] { SelectedClient.Id });
+                        try
+                        {
+                            _context.Database.ExecuteSqlRaw("EXEC dbo.DeleteClient @p0", new object[] { SelectedClient.Id });
 
+
+                        } catch (Exception ex)
+                        {
+                            MessageBox.Show($"Ошибка: {ex}");
+                        }
+                        
+
+                   
                         // Перезагрузка данных после удаления
                         LoadClients();
                     }
@@ -527,6 +537,7 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
                     ClearFields(null);
                 }
             }
+            
 
             #endregion
 

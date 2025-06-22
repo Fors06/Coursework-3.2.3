@@ -20,7 +20,7 @@ namespace Курсовая_на_Майкрософте.View
 
            
             DataContext = new LoginViewModel();
-           
+
         }
 
 

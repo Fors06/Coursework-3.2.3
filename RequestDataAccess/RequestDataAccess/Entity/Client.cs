@@ -22,5 +22,9 @@ namespace RequestDataAccess.Entity
 
         [ForeignKey("Users_id")] public virtual Users Users { get; set; }
 
+
+        public ICollection<Cars> CarsId { get; set; }
+        public ICollection<Order> Заказы { get; set; }
+
     }
 }

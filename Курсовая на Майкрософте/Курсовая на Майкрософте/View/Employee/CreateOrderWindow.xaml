@@ -8,7 +8,7 @@
         xmlns:local2="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf" xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Icon="/View/vecteezy_car-services-automotive-logo-design-template_12188355.jpg"
-        Title="Добавление заказа" Height="450" Width="800">
+        Title="Добавление заказа" Height="450" Width="800" WindowState="Maximized">
 
     <Window.Resources>
 
@@ -78,7 +78,7 @@
             FontSize="16" 
             Mask="+7 (000) 000-00-00" Foreground="White" BorderBrush="White"
             PromptChar="_" Style="{StaticResource MaterialDesignTextBox}"
-            Text="{Binding EmployeePhoneNumber, Mode=TwoWay}"
+            Text="{Binding Телефон, Mode=TwoWay}"
             Margin="5,28,5,0"
             Height="40"
             VerticalAlignment="Top"
