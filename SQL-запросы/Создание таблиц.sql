@@ -54,7 +54,7 @@ CREATE TABLE Автомобиль (
     Модель VARCHAR(50) NOT NULL,
     [Год выпуска] INT NOT NULL,
     Client_id INT,
-    Malfunction_id INT NOT NULL,
+    Malfunction_id INT,
     FOREIGN KEY (Client_id) REFERENCES Клиент(Id), -- Без каскадного удаления
     FOREIGN KEY (Malfunction_id) REFERENCES Неисправность(Id)
 );
@@ -99,7 +99,7 @@ CREATE TABLE Заказ (
     Стоимость DECIMAL(10, 2) NOT NULL,
     Cars_id INT,
     Clients_id INT,
-    Master_id INT NOT NULL,
+    Master_id INT,
     Auto_Service_id INT NOT NULL,
     Statuses_id INT NOT NULL,
     Services_id INT NOT NULL,

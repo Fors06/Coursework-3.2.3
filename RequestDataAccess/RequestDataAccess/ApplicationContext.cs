@@ -24,6 +24,4 @@ namespace RequestDataAccess
             optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=Автомастерская_2;Trusted_Connection=True;");
         }
     }
-
-
 }

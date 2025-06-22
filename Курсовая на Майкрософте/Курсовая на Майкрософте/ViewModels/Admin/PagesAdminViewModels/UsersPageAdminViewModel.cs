@@ -252,8 +252,8 @@ namespace Курсовая_на_Майкрософте.ViewModels.Admin.PagesAdm
                     _selectedClient = value;
                     OnPropertyChanged(nameof(SelectedClient));
 
-                    ClientLastName = _selectedClient?.Имя ?? String.Empty;
-                    ClientFirstName = _selectedClient?.Фамилия ?? String.Empty;
+                    ClientFirstName = _selectedClient?.Имя ?? String.Empty;
+                    ClientLastName = _selectedClient?.Фамилия ?? String.Empty;
                     ClientMiddleName = _selectedClient?.Отчество ?? String.Empty;
                     ClientPhoneNumber = _selectedClient?.Телефон ?? String.Empty;
                     Passwod = _selectedClient?.Users.Пароль ?? String.Empty;

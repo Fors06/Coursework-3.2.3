@@ -12,8 +12,6 @@ namespace RequestDataAccess.Entity
         public int Id { get; set; }
         [Column("Роль")]
         public string Роль { get; set; } = String.Empty;
-   
-
     }
     public enum UserTypes
     {

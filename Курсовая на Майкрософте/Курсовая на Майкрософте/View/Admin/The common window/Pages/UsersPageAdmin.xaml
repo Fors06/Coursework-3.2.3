@@ -79,14 +79,14 @@
                                  Style="{StaticResource MaterialDesignTextBox}" 
                                  FontSize="16" Foreground="White" BorderBrush="White" 
                                  Margin="5,5,5,0" Height="40" VerticalAlignment="Top"
-                                 Text="{Binding ClientFirstName, Mode=TwoWay}" 
+                                 Text="{Binding ClientLastName, Mode=TwoWay}" 
                                  Grid.Column="0" Grid.Row="1"/>
 
                         <TextBox materialDesign:HintAssist.Hint="Имя..." 
                                  Style="{StaticResource MaterialDesignTextBox}"
                                  FontSize="16" Foreground="White" BorderBrush="White" 
                                  Margin="5,5,5,0" Height="40" VerticalAlignment="Top"
-                                 Text="{Binding ClientLastName, Mode=TwoWay}" 
+                                 Text="{Binding ClientFirstName, Mode=TwoWay}" 
                                  Grid.Column="1" Grid.Row="1"/>
 
                         <TextBox materialDesign:HintAssist.Hint="Отчество..." 

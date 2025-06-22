@@ -28,11 +28,11 @@ namespace RequestDataAccess.Entity
         [ForeignKey("User_Type_id")]
         public virtual Type_User User_Typeid { get; set; }
 
-        // Навигационное свойство для сотрудников
-        public ICollection<Employee> Employees { get; set; }
+        //// Навигационное свойство для сотрудников
+        //public ICollection<Employee> Employees { get; set; }
 
-        // Навигационное свойство для клиентов
-        public ICollection<Client> Clients { get; set; }
+        //// Навигационное свойство для клиентов
+        //public ICollection<Client> Clients { get; set; }
 
 
     }

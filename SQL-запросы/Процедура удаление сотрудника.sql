@@ -9,17 +9,19 @@ BEGIN
     BEGIN TRY
         BEGIN TRANSACTION;
 
-        -- 1. Сначала удаляем все заказы, связанные с сотрудником
-        DELETE FROM Заказ WHERE Master_id = @employeeId;
+		-- 1. Обновляем заказы, чтобы они не ссылались на удаленного клиента
+        UPDATE Заказ
+        SET Master_id = NULL
+        WHERE Master_id = @employeeId;
 
-        -- 2. Получаем User_id сотрудника
+        -- 1. Получаем User_id сотрудника
         DECLARE @userId INT;
         SELECT @userId = Users_id FROM Сотрудник WHERE Id = @employeeId;
 
-        -- 3. Удаляем сотрудника
+        -- 2. Удаляем сотрудника
         DELETE FROM Сотрудник WHERE Id = @employeeId;
 
-        -- 4. Удаляем пользователя
+        -- 3. Удаляем пользователя
         DELETE FROM Пользователь WHERE Id = @userId;
 
         COMMIT TRANSACTION;
